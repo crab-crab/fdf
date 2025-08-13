@@ -149,11 +149,12 @@ void line_oct7(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
 	p = (2 * dx) - dy;
 	while (y_0 >= y_1)
 	{
+		// if (!(x_0 < 0 || x_0 > WIDTH || y_0 < 0 || y_0 > HEIGHT))
 		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
 		if (p >= 0)
 		{
 			x_0--;
-			p-= 2 * dy;
+			p -= 2 * dy;
 		}
 		p += 2 * dx;
 		y_0--;
@@ -182,8 +183,6 @@ void line_oct8(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
 	}
 }
 
-
-
 /*
 Unified line drawing equation with logic to choose between the relevant
 sub-sector equations.
@@ -199,8 +198,12 @@ void draw_line(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
 	int32_t dx;
 	int32_t dy;
 
-	dx = x_1 - x_0;
-	dy = y_1 - y_0;
+	dx = x_0 - x_1;
+	dy = y_0 - y_1;
+	if (dx < 0)
+		dx = -dx;
+	if (dy < 0)
+		dy = -dy;
 	if (dx >= 0 && dy >= 0)
 	{
 		if (dy <= dx)
@@ -213,15 +216,15 @@ void draw_line(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
 			return(line_oct3(x_0, y_0, x_1, y_1));
 		line_oct4(x_0, y_0, x_1, y_1);
 	}
-	else if (dx >= 0 && dy < 0)
+	else if (dx < 0 && dy >= 0)
 	{
-		if (-dy >= dx)
+		if (dy <= -dx)
 			return(line_oct5(x_0, y_0, x_1, y_1));
 		line_oct6(x_0, y_0, x_1, y_1);
 	}
 	else
 	{
-		if (-dy >= dx)
+		if (-dy >= -dx)
 			return(line_oct7(x_0, y_0, x_1, y_1));
 		line_oct8(x_0, y_0, x_1, y_1);
 	}
@@ -252,11 +255,11 @@ void	hook(void* param)
 	// Octave 6
 	draw_line(500, 500, 900, 1000); //YES
 
-	draw_line(500, 500, 1000, 0);
-	// // Octave 7
-	// draw_line(500, 500, 900, 0);
-	// // Octave 8
-	// draw_line(500, 500, 1000, 100);
+	//draw_line(500, 500, 1000, 0);
+	// Octave 7
+	draw_line(500, 500, 900, 0);
+	// Octave 8
+	draw_line(500, 500, 1000, 100);
 
 	//crosshair
 	draw_line(500, 0, 500, 500); // vertical top
