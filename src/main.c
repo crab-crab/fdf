@@ -6,228 +6,54 @@
 
 static mlx_image_t	*g_img;
 
-void line_oct1(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
+// int32_t ft_abs(int32_t num)
+// {
+// 	if (num < 0)
+// 		num = -num;
+// 	return (num);
+// }
+
+void    draw_line(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1)
 {
-	int32_t dx;
-	int32_t dy;
-	int32_t	p;
-	
-	dx = x_1 - x_0;
-	dy = y_1 - y_0;
-	p = (2 * dy) - dx;
-	while (x_0 <= x_1)
-	{
-		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
-		if (p >= 0)
-		{
-			y_0++;
-			p-= 2 * dx;
-		}
-		p += 2 * dy;
-		x_0++;
-	}
-}
+    int32_t dx;
+    int32_t dy;
+    int32_t stepx;
+    int32_t stepy;
+    int32_t err;
+    int32_t e2;
 
-void line_oct2(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
-{
-	int32_t dx;
-	int32_t dy;
-	int32_t	p;
-
-	dx = x_1 - x_0;
-	dy = y_1 - y_0;
-	p = (2 * dx) - dy;
-	while (y_0 <= y_1)
-	{
-		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
-		if (p >= 0)
-		{
-			x_0++;
-			p-= 2 * dy;
-		}
-		p += 2 * dx;
-		y_0++;
-	}
-}
-
-void line_oct3(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
-{
-	int32_t dx;
-	int32_t dy;
-	int32_t	p;
-
-	dx = x_1 - x_0;
-	dy = -(y_1 - y_0);
-	p = (2 * dx) - dy;
-	while (y_0 >= y_1)
-	{
-		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
-		if (p >= 0)
-		{
-			x_0++;
-			p-= 2 * dy;
-		}
-		p += 2 * dx;
-		y_0--;
-	}
-}
-
-void line_oct4(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
-{
-	int32_t dx;
-	int32_t dy;
-	int32_t	p;
-	
-	dx = x_1 - x_0;
-	dy = y_0 - y_1;
-	p = (2 * dy) - dx;
-	while (x_0 <= x_1)
-	{
-		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
-		if (p >= 0)
-		{
-			y_0--;
-			p -= 2 * dx;
-		}
-		p += 2 * dy;
-		x_0++;
-	}
-}
-
-void line_oct5(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
-{
-	int32_t dx;
-	int32_t dy;
-	int32_t	p;
-	
-	dx = x_0 - x_1;
-	dy = y_1 - y_0;
-	p = (2 * dy) - dx;
-	while (x_0 >= x_1)
-	{
-		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
-		if (p >= 0)
-		{
-			y_0++;
-			p -= 2 * dx;
-		}
-		p += 2 * dy;
-		x_0--;
-	}
-}
-
-void line_oct6(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
-{
-	int32_t dx;
-	int32_t dy;
-	int32_t	p;
-	
-	dx = x_0 - x_1;
-	dy = y_1 - y_0;
-	p = (2 * dx) - dy;
-	while (y_0 <= y_1)
-	{
-		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
-		if (p >= 0)
-		{
-			x_0--;
-			p -= 2 * dy;
-		}
-		p += 2 * dx;
-		y_0++;
-	}
-}
-
-void line_oct7(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
-{
-	int32_t dx;
-	int32_t dy;
-	int32_t	p;
-
-	dx = x_0 - x_1;
-	dy = y_0 - y_1;
-	p = (2 * dx) - dy;
-	while (y_0 >= y_1)
-	{
-		// if (!(x_0 < 0 || x_0 > WIDTH || y_0 < 0 || y_0 > HEIGHT))
-		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
-		if (p >= 0)
-		{
-			x_0--;
-			p -= 2 * dy;
-		}
-		p += 2 * dx;
-		y_0--;
-	}
-}
-
-void line_oct8(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
-{
-	int32_t dx;
-	int32_t dy;
-	int32_t	p;
-	
-	dx = x_0 - x_1;
-	dy = y_0 - y_1;
-	p = (2 * dy) - dx;
-	while (x_0 >= x_1)
-	{
-		mlx_put_pixel(g_img, x_0, y_0, 0xFFFFFFFF);
-		if (p >= 0)
-		{
-			y_0--;
-			p -= 2 * dx;
-		}
-		p += 2 * dy;
-		x_0--;
-	}
-}
-
-/*
-Unified line drawing equation with logic to choose between the relevant
-sub-sector equations.
-
--	Quadrant 1 (right and up, +x/+y) - Oct1 & Oct2
--	Quadrant 2 (right and down, +x/-y) - Oct3 & Oct4
--	Quadrant 3 (left and up, -x/+y) - Oct5 & Oct6
--	Quadrant 4 (left and down, -x/-y) - Oct7 & Oct8
-
-*/
-void draw_line(uint32_t x_0, uint32_t y_0, uint32_t x_1, uint32_t y_1)
-{
-	int32_t dx;
-	int32_t dy;
-
-	dx = x_0 - x_1;
-	dy = y_0 - y_1;
-	if (dx < 0)
-		dx = -dx;
-	if (dy < 0)
-		dy = -dy;
-	if (dx >= 0 && dy >= 0)
-	{
-		if (dy <= dx)
-			return(line_oct1(x_0, y_0, x_1, y_1));
-		line_oct2(x_0, y_0, x_1, y_1);
-	}
-	else if (dx >= 0 && dy < 0)
-	{
-		if (-dy >= dx)
-			return(line_oct3(x_0, y_0, x_1, y_1));
-		line_oct4(x_0, y_0, x_1, y_1);
-	}
-	else if (dx < 0 && dy >= 0)
-	{
-		if (dy <= -dx)
-			return(line_oct5(x_0, y_0, x_1, y_1));
-		line_oct6(x_0, y_0, x_1, y_1);
-	}
-	else
-	{
-		if (-dy >= -dx)
-			return(line_oct7(x_0, y_0, x_1, y_1));
-		line_oct8(x_0, y_0, x_1, y_1);
-	}
+    dx = (int32_t)x1 - (int32_t)x0;
+    if (dx < 0)
+        dx = -dx;
+    dy = (int32_t)y1 - (int32_t)y0;
+    if (dy < 0)
+        dy = -dy;
+    if (x0 < x1)
+        stepx = 1;
+    else
+        stepx = -1;
+    if (y0 < y1)
+        stepy = 1;
+    else
+        stepy = -1;
+    err = dx - dy;
+    while (1)
+    {
+        mlx_put_pixel(g_img, x0, y0, 0xFFFFFFFF);
+        if (x0 == x1 && y0 == y1)
+            break;
+        e2 = 2 * err;
+        if (e2 > -dy)
+        {
+            err -= dy;
+            x0 += stepx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            y0 += stepy;
+        }
+    }
 }
 
 void	hook(void* param)
@@ -246,28 +72,26 @@ void	hook(void* param)
 	draw_line(100, 0, 500, 500); //YES
 
 	// Octave 3
-	draw_line(100, 1000, 500, 500); //YES
+	draw_line(100, 1000, 500, 500); // not working
 	// Octave 4
-	draw_line(0, 900, 500, 500); //YES
+	draw_line(0, 900, 500, 500); // not working
 
 	// Octave 5
 	draw_line(500, 500, 1000, 900); //YES
 	// Octave 6
 	draw_line(500, 500, 900, 1000); //YES
 
-	//draw_line(500, 500, 1000, 0);
 	// Octave 7
-	draw_line(500, 500, 900, 0);
+	draw_line(500, 500, 900, 0); // not working
 	// Octave 8
-	draw_line(500, 500, 1000, 100);
+	draw_line(500, 500, 1000, 100); // not working
 
 	//crosshair
 	draw_line(500, 0, 500, 500); // vertical top
 	draw_line(0, 500, 500, 500); // horizontal left
 	draw_line(500, 500, 500, 1000); // horizontal right
 	draw_line(500, 500, 1000, 500); // vertical bottom
-	//draw_line(0, 0, 400, 500);
-	//draw_line(0, 0, 500, 400); // non-steep  0<m<1
+
 }
 
 
