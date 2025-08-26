@@ -1,17 +1,16 @@
 #include "fdf.h"
-#include "stdio.h"
 
 #define WIDTH 2000
 #define HEIGHT 2000
 
 static mlx_image_t	*g_img;
 
-// int32_t ft_abs(int32_t num)
-// {
-// 	if (num < 0)
-// 		num = -num;
-// 	return (num);
-// }
+int32_t ft_abs(int32_t num)
+{
+	if (num < 0)
+		num = -num;
+	return (num);
+}
 
 void    draw_line(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1)
 {
@@ -22,12 +21,8 @@ void    draw_line(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1)
     int32_t err;
     int32_t e2;
 
-    dx = (int32_t)x1 - (int32_t)x0;
-    if (dx < 0)
-        dx = -dx;
-    dy = (int32_t)y1 - (int32_t)y0;
-    if (dy < 0)
-        dy = -dy;
+    dx = ft_abs((int32_t)x1 - (int32_t)x0);
+    dy = ft_abs((int32_t)y1 - (int32_t)y0);
     if (x0 < x1)
         stepx = 1;
     else
@@ -67,24 +62,32 @@ void	hook(void* param)
 		mlx_delete_image(mlx, g_img);
 
 	// Octave 1
+	draw_line(0, 200, 500, 500);
 	draw_line(0, 100, 500, 500); //YES
 	// Octave 2
+	draw_line(200, 0, 500, 500);
 	draw_line(100, 0, 500, 500); //YES
 
 	// Octave 3
-	draw_line(100, 1000, 500, 500); // not working
+	draw_line(100, 1000, 500, 500); //YES
+	draw_line(200, 1000, 500, 500);
 	// Octave 4
-	draw_line(0, 900, 500, 500); // not working
+	draw_line(0, 900, 500, 500); //YES
+	draw_line(0, 800, 500, 500);
 
 	// Octave 5
 	draw_line(500, 500, 1000, 900); //YES
+	draw_line(500, 500, 1000, 800);
 	// Octave 6
 	draw_line(500, 500, 900, 1000); //YES
+	draw_line(500, 500, 800, 1000);
 
 	// Octave 7
-	draw_line(500, 500, 900, 0); // not working
+	draw_line(500, 500, 900, 0); //YES
+	draw_line(500, 500, 800, 0); 
 	// Octave 8
-	draw_line(500, 500, 1000, 100); // not working
+	draw_line(500, 500, 1000, 100); //YES
+	draw_line(500, 500, 1000, 200);
 
 	//crosshair
 	draw_line(500, 0, 500, 500); // vertical top

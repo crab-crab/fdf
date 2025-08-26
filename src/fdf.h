@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/07/31 11:14:35 by crabin           ###   ########.fr       */
+/*   Updated: 2025/08/26 15:12:16 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,14 @@ typedef struct object
 	int32_t		pos_y;
 	int32_t		colour;
 } obf_t;
+
+
+typedef struct s_node
+{
+	uint32_t	x;
+	uint32_t	y;
+	int32_t		z;
+	uint32_t	color;
+} t_node;
 
 #endif
