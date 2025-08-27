@@ -45,19 +45,36 @@ int	fill_buffer(char **buffer, int fd)
 	return (1);
 }
 
-uint32_t parse_map(char *filename, char ***map)
+int32_t 	ft_size(char **arr)
+{
+	int32_t size;
+
+	size = 0;
+	if (!arr)
+		return (-1);
+	while (*arr)
+	{
+		size++;
+		arr++;
+	}
+	return (size);
+}
+
+int32_t parse_map(char *filename, t_map *map)
 {
 	int		fd;
 	char	*buffer;
 	ssize_t	bytes_read;
-	char	*text;
+	char	**text;
 
 	fd = open(filename, O_RDONLY);
 	if (fill_buffer(&buffer, fd) < 0)
 		return (-1);
-	*map = ft_split(buffer, '\n');
-	if (!*map)
+	text = ft_split(buffer, '\n');
+	if (!*text)
 		return (-1);
+	map->size_y = ft_size(text);
+
 
 	return (1);
 }

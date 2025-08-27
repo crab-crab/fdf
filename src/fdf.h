@@ -19,15 +19,6 @@
 #include <memory.h>
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 
-/**
- * Main MLX handle, carries important data in regards to the program.
- * @param window The window itself.
- * @param context Abstracted opengl data.
- * @param width The width of the window.
- * @param height The height of the window.
- * @param delta_time The time difference between the previous frame and the current frame.
- */
-
 typedef struct s_node
 {
 	int32_t		z;
