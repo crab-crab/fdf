@@ -8,7 +8,8 @@ LIBMLX = lib/MLX42
 HEADERS = -I ./include -I $(LIBMLX)/include
 LIBS = $(LIBMLX)/build/libmlx42.a -lglfw -pthread -lm
 
-SRCS = src/main.c
+SRCS =	src/main.c \
+		src/line_draw.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
