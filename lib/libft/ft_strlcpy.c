@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:21:45 by crabin            #+#    #+#             */
-/*   Updated: 2025/05/09 15:14:13 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/01 12:35:46 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dsize)
 
 	src_len = ft_strlen(src);
 	i = 0;
+	if (!src || src_len == 0)
+		return (src_len);
 	while (src[i] && dsize > 1)
 	{
 		dst[i] = src[i];

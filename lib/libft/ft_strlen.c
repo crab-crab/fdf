@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:13:54 by crabin            #+#    #+#             */
-/*   Updated: 2025/05/06 15:54:10 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/01 12:32:51 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
+	if (s == NULL)
+		return (0);
 	while (s[len])
 		len++;
 	return (len);

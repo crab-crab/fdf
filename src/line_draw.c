@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:00:46 by crabin            #+#    #+#             */
-/*   Updated: 2025/08/27 13:01:22 by crabin           ###   ########.fr       */
+/*   Updated: 2025/08/29 16:20:50 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,67 @@ int32_t get_step(int32_t p0, int32_t p1)
 	return (step);
 }
 
-uint32_t get_colour(void)
+void init_line(t_line *line, t_point p0, t_point p1)
 {
-	return (0xFFFFFFFF);
+	line->dx = ft_abs((int32_t)p1.pix_x - (int32_t)p0.pix_x);
+	line->dy = ft_abs((int32_t)p1.pix_y - (int32_t)p0.pix_y);
+	line->stepx = get_step(p0.pix_x, p1.pix_x);
+	line->stepy = get_step(p0.pix_y, p1.pix_y);
+	line->err = line->dx - line->dy;
 }
+
+// float weight_scuffed(t_point start, t_point p0, t_line line)
+// {
+// 	float p_x;
+// 	float p_y;
+
+// 	p_x = ft_abs(((float)p0.pix_x - (float)start.pix_x)) / (float)line.dx;
+// 	p_y = ft_abs(((float)p0.pix_y - (float)start.pix_y)) / (float)line.dy;
+
+// 	if (p_x == 0)
+// 		return (p_y);
+// 	else if (p_y == 0)
+// 		return (p_x);
+// 	else
+// 		return ((p_x + p_y) / 2);
+// }
 
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img)
 {
 	t_line line;
 	int32_t e2;
+	t_point start;
 
-	line.dx = ft_abs((int32_t)p1.x - (int32_t)p0.x);
-	line.dy = ft_abs((int32_t)p1.y - (int32_t)p0.y);
-	line.stepx = get_step(p0.x, p1.x);
-	line.stepy = get_step(p0.y, p1.y);
-	line.err = line.dx - line.dy;
-	while (p0.x != p1.x || p0.y != p1.y)
+	start.pix_x = p0.pix_x;
+	start.pix_y = p0.pix_y;
+	init_line(&line, p0, p1);
+	while (p0.pix_x != p1.pix_x || p0.pix_y != p1.pix_y)
     {
-        mlx_put_pixel(g_img, p0.x, p0.y, get_colour());
+        mlx_put_pixel(g_img, p0.pix_x, p0.pix_y, get_colour(p0, p1, weight_scuffed(start, p0, line)));
 		e2 = 2 * line.err;
 		if (e2 > -line.dy)
 		{
 			line.err -= line.dy;
-			p0.x += line.stepx;
+			p0.pix_x += line.stepx;
 		}
 		if (e2 < line.dx)
 		{
 			line.err += line.dx;
-			p0.x += line.stepy;
+			p0.pix_y += line.stepy;
 		}
 	}
-	mlx_put_pixel(g_img, p0.x, p0.y, get_colour());
+	mlx_put_pixel(g_img, p0.pix_x, p0.pix_y, get_colour(p0, p1, weight_scuffed(start, p0, line)));
+}
+
+void	draw_update(t_display	*display)
+{
+	if (display->p0.pix_x >= 0 && display->p0.pix_x <= WIDTH \
+		&& display->p1.pix_x >= 0 && display->p1.pix_x <= WIDTH)
+	{
+		draw_line(display->p0, display->p1, display->g_img);
+	}
+	else
+	{
+		printf("! Pixel Out of Bounds !\n");
+	}
 }
