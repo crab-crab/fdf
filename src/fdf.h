@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/04 17:25:21 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/04 17:57:33 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int32_t ft_abs(int32_t num);
 
 // point generation
 void res_point(t_display *display, t_point *p);
-void gen_point(t_point *p, uint32_t x, uint32_t y, int32_t z);
+void gen_point(t_point *p, uint32_t x, uint32_t y, int32_t z, uint32_t colour);
 
 // drawing line
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
