@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/02 13:55:45 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/04 17:25:21 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef struct s_display
 {
 	t_point		p0;
 	t_point		p1;
+	uint32_t	offset_x;
+	uint32_t	offset_y;
+	float		zoom_factor;
 	t_map		*map;
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
@@ -83,6 +86,10 @@ int32_t parse_map(char *filename, t_map *map);
 // math
 int32_t ft_abs(int32_t num);
 
+// point generation
+void res_point(t_display *display, t_point *p);
+void gen_point(t_point *p, uint32_t x, uint32_t y, int32_t z);
+
 // drawing line
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
 int32_t get_step(int32_t p0, int32_t p1);
@@ -102,5 +109,6 @@ float weight_scuffed(t_point start, t_point p0, t_line line);
 
 // debugging
 void p_display_val(t_display	*display);
+void p_map(t_map *map);
 
 #endif

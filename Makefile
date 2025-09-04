@@ -15,7 +15,8 @@ SRCS =	src/main.c \
 		src/hook_test.c \
 		src/colour.c \
 		src/ingest.c \
-		src/grid_draw.c
+		src/grid_draw.c \
+		src/debug.c
 
 OBJS = $(SRCS:.c=.o)
 

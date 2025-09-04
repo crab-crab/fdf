@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:00:46 by crabin            #+#    #+#             */
-/*   Updated: 2025/08/29 16:20:50 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/04 17:36:42 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img)
 
 void	draw_update(t_display	*display)
 {
+	
+	res_point(display, &(display->p0));
+	res_point(display, &(display->p1));
+	
 	if (display->p0.pix_x >= 0 && display->p0.pix_x <= WIDTH \
 		&& display->p1.pix_x >= 0 && display->p1.pix_x <= WIDTH)
 	{

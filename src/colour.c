@@ -30,6 +30,10 @@ uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 	t_colour c1;
 	t_colour result;
 
+	if (p0 == 0)
+		p0 = UINT32_MAX;
+	if (p1 == 0)
+		p1 = UINT32_MAX;
 	get_rgb(p0, &c0);
 	get_rgb(p1, &c1);
 
@@ -39,19 +43,19 @@ uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 	return (blend_rgb(&result));
 }
 
-/*using floats*/
-float get_weight(t_point p0, t_point p1, t_point start)
-{
-	float d0;
-	float d1;
-	float weight;
+// /*using floats*/
+// float get_weight(t_point p0, t_point p1, t_point start)
+// {
+// 	float d0;
+// 	float d1;
+// 	float weight;
 
-	d0 = sqrt(pow((p0.pix_x - start.pix_x), 2) + pow((p0.pix_y - start.pix_y), 2));
-	d1 = sqrt(pow((p1.pix_x - p0.pix_x), 2) + pow((p1.pix_y - p0.pix_y), 2));
+// 	d0 = sqrt(pow((p0.pix_x - start.pix_x), 2) + pow((p0.pix_y - start.pix_y), 2));
+// 	d1 = sqrt(pow((p1.pix_x - p0.pix_x), 2) + pow((p1.pix_y - p0.pix_y), 2));
 
-	weight = (d0 / (d0 + d1));
-	return (weight);
-}
+// 	weight = (d0 / (d0 + d1));
+// 	return (weight);
+// }
 
 float weight_scuffed(t_point start, t_point p0, t_line line)
 {
