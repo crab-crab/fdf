@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:18:04 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/04 16:41:51 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/10 14:55:52 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void p_display_val(t_display	*display)
 	printf("Display Values: \n");
 	printf("p0 | x:%d y:%d\n", display->p0.pix_x, display->p0.pix_y);
 	printf("p1 | x:%d y:%d\n", display->p1.pix_x, display->p1.pix_y);
+}
+
+void p_point(t_point *p)
+{
+	printf("Point | x:%f y:%f z:%f | pi_x:%d pi_y:%d \n", p->x, p->y, p->z, p->pix_x, p->pix_y);
 }
 
 void p_map(t_map *map)

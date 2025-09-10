@@ -31,9 +31,9 @@ int main(void)
 	display->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	display->g_img = mlx_new_image(display->mlx, 2000, 2000);
 	display->map = &map;
-	display->zoom_factor = 70;
-	display->offset_x = 100;
-	display->offset_y = 100;
+	display->zoom_factor = 100;
+	display->offset_x = 500;
+	display->offset_y = 500;
 	// p_map(&map);
 	// return(1);
 	if (!display->mlx || !display->g_img)

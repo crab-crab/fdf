@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/04 17:57:33 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/10 15:02:13 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "../lib/libft/libft.h"
 
 # define BUFFER_SIZE 2048
+# define PI	3.1416
 # define WIDTH 2000
 # define HEIGHT 2000
 
@@ -37,8 +38,8 @@ typedef struct s_point
 	float		x;
 	float		y;
 	float		z;
-	uint32_t	pix_x;
-	uint32_t	pix_y;
+	int32_t	pix_x;
+	int32_t	pix_y;
 	uint32_t	colour;
 } t_point;
 
@@ -88,7 +89,7 @@ int32_t ft_abs(int32_t num);
 
 // point generation
 void res_point(t_display *display, t_point *p);
-void gen_point(t_point *p, uint32_t x, uint32_t y, int32_t z, uint32_t colour);
+void gen_point(t_point *p, int32_t x, int32_t y, int32_t z, uint32_t colour);
 
 // drawing line
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
@@ -106,9 +107,15 @@ void	grid_hook(void* display);
 uint32_t get_colour(t_point p0, t_point p1, float weight);
 float weight_scuffed(t_point start, t_point p0, t_line line);
 
+// math
+float dtor(float degrees);
+float rtod(float radians);
+
+
 
 // debugging
 void p_display_val(t_display	*display);
 void p_map(t_map *map);
+void p_point(t_point *p);
 
 #endif
