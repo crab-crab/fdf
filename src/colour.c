@@ -23,6 +23,20 @@ uint32_t	blend_rgb(t_colour *colour)
 	return result | 0xFF;
 }
 
+// uint32_t	blend_rgb(t_colour *colour)
+// {
+// 	uint32_t	result;
+
+// 	result = 0xFF;
+// 	result = result << 8;
+// 	result |= colour->rr;
+// 	result = result << 8;
+// 	result |= colour->gg;
+// 	result = result << 8;
+// 	result |= colour->bb;
+// 	return result;
+// }
+
 /*blend two 32-bit colours together according to a weight value (0.0 - 1.0)*/
 uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 {

@@ -27,9 +27,9 @@ int dyn_zoom(t_display	*display)
 	zoom_y = (HEIGHT -  100) / display->map->size_y;
 	
 	if (zoom_x < zoom_y)
-		return (zoom_x);
+		return (zoom_x/2);
 	else
-		return (zoom_y);
+		return (zoom_y/2);
 }
 
 int main(void)
@@ -38,15 +38,15 @@ int main(void)
 	t_display	*display;
 	int	result;
 
-	char filename[100] = "test_maps/50-4.fdf";
+	char filename[100] = "test_maps/colour.fdf";
 	result = parse_map(filename, &map);
 	p_map(&map);
 	display = (t_display*)malloc(sizeof(t_display));
 	display->mlx = mlx_init(WIDTH, HEIGHT, "Chicken Coop", true);
 	display->g_img = mlx_new_image(display->mlx, 2000, 2000);
 	display->map = &map;
-	display->zoom_factor = 20;
-	//display->zoom_factor = dyn_zoom(display);
+	//display->zoom_factor = 20;
+	display->zoom_factor = dyn_zoom(display);
 	display->offset_x = 1000;
 	display->offset_y = 1000;
 	// p_map(&map);
