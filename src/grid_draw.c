@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:40 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/10 15:06:56 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/11 15:33:30 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void isometric(t_point *p)
 
 void res_point(t_display *display, t_point *p)
 {
-	//isometric(p);
+	isometric(p);
 	//p_point(p);
 	p->pix_x = (int32_t)((display->offset_x) + (p->x * display->zoom_factor));
 	p->pix_y = (int32_t)((display->offset_y) + (p->y * display->zoom_factor));
-	p_point(p);
+	//p_point(p);
 }
 
 void gen_point(t_point *p, int32_t x, int32_t y, int32_t z, uint32_t colour)

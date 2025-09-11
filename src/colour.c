@@ -95,7 +95,8 @@ uint32_t get_colour(t_point p0, t_point p1, float weight)
 	// p0.colour = 0x80FFFF;
 	// p1.colour = 0xFF00FF;
 
-	colour = blend_colour(p0.colour, p1.colour, weight);
+	//colour = blend_colour(p0.colour, p1.colour, weight);
+	colour = blend_colour(p0.colour, p1.colour, 0.5);
 	
 	// return (0x80FFFFFF);
 	return (colour);

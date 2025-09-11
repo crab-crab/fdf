@@ -18,22 +18,37 @@
 // 	return (EXIT_SUCCESS);
 // }
 
+int dyn_zoom(t_display	*display)
+{
+	int zoom_x;
+	int zoom_y;
+
+	zoom_x = (WIDTH -  100) / display->map->size_x;
+	zoom_y = (HEIGHT -  100) / display->map->size_y;
+	
+	if (zoom_x < zoom_y)
+		return (zoom_x);
+	else
+		return (zoom_y);
+}
+
 int main(void)
 {
 	t_map map;
 	t_display	*display;
 	int	result;
 
-	char filename[100] = "test_maps/elem-col.fdf";
+	char filename[100] = "test_maps/50-4.fdf";
 	result = parse_map(filename, &map);
 	p_map(&map);
 	display = (t_display*)malloc(sizeof(t_display));
-	display->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	display->mlx = mlx_init(WIDTH, HEIGHT, "Chicken Coop", true);
 	display->g_img = mlx_new_image(display->mlx, 2000, 2000);
 	display->map = &map;
-	display->zoom_factor = 100;
-	display->offset_x = 500;
-	display->offset_y = 500;
+	display->zoom_factor = 20;
+	//display->zoom_factor = dyn_zoom(display);
+	display->offset_x = 1000;
+	display->offset_y = 1000;
 	// p_map(&map);
 	// return(1);
 	if (!display->mlx || !display->g_img)
