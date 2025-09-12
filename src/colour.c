@@ -23,6 +23,7 @@ uint32_t	blend_rgb(t_colour *colour)
 	return result | 0xFF;
 }
 
+
 // uint32_t	blend_rgb(t_colour *colour)
 // {
 // 	uint32_t	result;
@@ -44,10 +45,6 @@ uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 	t_colour c1;
 	t_colour result;
 
-	if (p0 == 0)
-		p0 = UINT32_MAX;
-	if (p1 == 0)
-		p1 = UINT32_MAX;
 	get_rgb(p0, &c0);
 	get_rgb(p1, &c1);
 
@@ -70,6 +67,7 @@ uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 // 	weight = (d0 / (d0 + d1));
 // 	return (weight);
 // }
+
 
 float weight_scuffed(t_point start, t_point p0, t_line line)
 {
@@ -112,6 +110,21 @@ uint32_t get_colour(t_point p0, t_point p1, float weight)
 	//colour = blend_colour(p0.colour, p1.colour, weight);
 	colour = blend_colour(p0.colour, p1.colour, 0.5);
 	
-	// return (0x80FFFFFF);
+	return (0xFF00FF);
 	return (colour);
 }
+
+
+
+// void p_colour(uint32_t c)
+// {
+// 	t_colour colour;
+	
+// 	get_rgb(c, &colour);
+// 	printf("Colour %u | R%d G%d B%d\n", c, colour.rr, colour.gg, colour.bb);
+// }
+
+// int main(void)
+// {
+// 	p_colour(0x0000FF);
+// }

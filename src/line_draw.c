@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:00:46 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/11 16:05:19 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/12 15:31:54 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,6 @@ void init_line(t_line *line, t_point p0, t_point p1)
 	line->stepy = get_step(p0.pix_y, p1.pix_y);
 	line->err = line->dx - line->dy;
 }
-
-// float weight_scuffed(t_point start, t_point p0, t_line line)
-// {
-// 	float p_x;
-// 	float p_y;
-
-// 	p_x = ft_abs(((float)p0.pix_x - (float)start.pix_x)) / (float)line.dx;
-// 	p_y = ft_abs(((float)p0.pix_y - (float)start.pix_y)) / (float)line.dy;
-
-// 	if (p_x == 0)
-// 		return (p_y);
-// 	else if (p_y == 0)
-// 		return (p_x);
-// 	else
-// 		return ((p_x + p_y) / 2);
-// }
 
 void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, int32_t colour)
 {

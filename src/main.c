@@ -20,16 +20,11 @@
 
 int dyn_zoom(t_display	*display)
 {
-	int zoom_x;
-	int zoom_y;
+	int hypo;
 
-	zoom_x = (WIDTH -  100) / display->map->size_x;
-	zoom_y = (HEIGHT -  100) / display->map->size_y;
-	
-	if (zoom_x < zoom_y)
-		return (zoom_x/2);
-	else
-		return (zoom_y/2);
+	hypo = sqrt((display->map->size_x * display->map->size_x) + (display->map->size_y * display->map->size_y));
+
+	return (WIDTH / hypo);
 }
 
 int main(void)
@@ -38,7 +33,7 @@ int main(void)
 	t_display	*display;
 	int	result;
 
-	char filename[100] = "test_maps/colour.fdf";
+	char filename[100] = "test_maps/test2.fdf";
 	result = parse_map(filename, &map);
 	p_map(&map);
 	display = (t_display*)malloc(sizeof(t_display));
