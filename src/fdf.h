@@ -29,7 +29,8 @@
 
 extern	t_proj ISO_PROJ;
 extern	t_proj TOPDOWN;
-extern	t_proj SIDE;
+extern	t_proj SIDE1;
+extern	t_proj SIDE2;
 extern	t_proj DIMETRIC;
 extern	t_proj PERSPECT;
 extern	t_proj CABINET;
@@ -94,7 +95,6 @@ typedef struct s_proj
 	float		ry;
 	float		rz;
 } t_proj;
-
 
 typedef struct s_colour
 {
