@@ -27,6 +27,12 @@ int dyn_zoom(t_display	*display)
 	return (WIDTH / hypo);
 }
 
+/*
+Add
+	-Display init
+	-Keyhooks
+*/
+
 int main(void)
 {
 	t_map map;
@@ -42,8 +48,8 @@ int main(void)
 	display->map = &map;
 	//display->zoom_factor = 20;
 	display->zoom_factor = dyn_zoom(display);
-	display->offset_x = 1000;
-	display->offset_y = 1000;
+	display->offset_x = WIDTH / 2;
+	display->offset_y = HEIGHT / 2;
 	// p_map(&map);
 	// return(1);
 	if (!display->mlx || !display->g_img)

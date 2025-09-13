@@ -24,19 +24,15 @@ uint32_t	blend_rgb(t_colour *colour)
 }
 
 
-// uint32_t	blend_rgb(t_colour *colour)
-// {
-// 	uint32_t	result;
-
-// 	result = 0xFF;
-// 	result = result << 8;
-// 	result |= colour->rr;
-// 	result = result << 8;
-// 	result |= colour->gg;
-// 	result = result << 8;
-// 	result |= colour->bb;
-// 	return result;
-// }
+uint8_t clampf_u8(float value)
+{
+	if (value < 0)
+		return (0);
+	else if (value > 255)
+		return (255);
+	else
+		return ((uint8_t)(value + 0.5));
+}
 
 /*blend two 32-bit colours together according to a weight value (0.0 - 1.0)*/
 uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
@@ -48,9 +44,9 @@ uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 	get_rgb(p0, &c0);
 	get_rgb(p1, &c1);
 
-	result.rr = (uint8_t)(weight * c1.rr) + (uint8_t)((1 - weight) * c0.rr);
-	result.gg = (uint8_t)(weight * c1.gg) + (uint8_t)((1 - weight) * c0.gg);
-	result.bb = (uint8_t)(weight * c1.bb) + (uint8_t)((1 - weight) * c0.bb);
+	result.rr = clampf_u8((weight * c1.rr) + ((1 - weight) * c0.rr));
+	result.gg = clampf_u8((weight * c1.gg) + ((1 - weight) * c0.gg));
+	result.bb = clampf_u8((weight * c1.bb) + ((1 - weight) * c0.bb));
 	return (blend_rgb(&result));
 }
 
@@ -104,13 +100,9 @@ uint32_t get_colour(t_point p0, t_point p1, float weight)
 {
 	uint32_t colour;
 
-	// p0.colour = 0x80FFFF;
-	// p1.colour = 0xFF00FF;
-
-	//colour = blend_colour(p0.colour, p1.colour, weight);
-	colour = blend_colour(p0.colour, p1.colour, 0.5);
+	colour = blend_colour(p0.colour, p1.colour, weight);
 	
-	return (0xFF00FF);
+	//return (0xFF00FF);
 	return (colour);
 }
 

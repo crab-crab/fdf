@@ -24,6 +24,8 @@ void isometric(t_point *p)
 	p->y = ((temp_x + temp_y) * sin(0.523599) - p->z);
 }
 
+// move to rotation/drawing/rendering
+// take display rotation parameters and pass to rotate point
 void res_point(t_display *display, t_point *p)
 {
 	isometric(p);
@@ -65,6 +67,12 @@ void connect_v(t_display	*display, uint32_t x, uint32_t y)
 	draw_update(display);
 }
 
+
+/*
+Add
+	-Node drawing
+	-Vertex->helper function
+*/
 void draw_grid(t_display	*display)
 {
 	uint32_t x;

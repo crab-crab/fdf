@@ -151,6 +151,10 @@ int32_t parse_map(char *filename, t_map *map)
 		while (j < map->size_x)
 		{
 			map->node_arr[i][j].z = ft_atoi(line[j]);
+			if (map->node_arr[i][j].z > map->max_z)
+				map->max_z = map->node_arr[i][j].z;
+			if (map->node_arr[i][j].z < map->min_z)
+				map->min_z = map->node_arr[i][j].z;
 			map->node_arr[i][j].colour = ft_hextoi(line[j]);
 			free(line[j]);
 			j++;

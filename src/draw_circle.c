@@ -44,8 +44,9 @@ void circle_points(mlx_image_t *g_img, t_point p, int32_t x, int32_t y)
 
 /*
 Draws circle outline by plotting 8 rotationally symetrical points for 45deg
+-> trying to connect points and draw 4 horizontal lines instead
 */
-void draw_circle(mlx_image_t *g_img, t_point p, int32_t r)
+void draw_circle(mlx_image_t *g_img, t_point p, int32_t r, uint8_t fill)
 {
 	int32_t x;
 	int32_t y;
@@ -56,7 +57,10 @@ void draw_circle(mlx_image_t *g_img, t_point p, int32_t r)
 	d = 1 - r;
 	while (x <= y)
 	{
-		circle_points(g_img, p, x, y);
+		if (fill == 1)
+			circle_fill(g_img, p, x, y);
+		else
+			circle_points(g_img, p, x, y)
 		if (d < 0)
 			d += 2 * x + 3;
 		else
