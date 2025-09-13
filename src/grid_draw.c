@@ -14,8 +14,14 @@
 
 void isometric(t_point *p)
 {
-	p->x = ((p->x - p->y) * cos(0.523599));
-	p->y = ((p->x + p->y) * sin(0.523599) - p->z);
+	int32_t temp_x;
+	int32_t temp_y;
+
+	temp_x = p->x;
+	temp_y = p->y;
+	
+	p->x = ((temp_x - temp_y) * cos(0.523599));
+	p->y = ((temp_x + temp_y) * sin(0.523599) - p->z);
 }
 
 void res_point(t_display *display, t_point *p)
