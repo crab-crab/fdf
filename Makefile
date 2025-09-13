@@ -16,7 +16,11 @@ SRCS =	src/main.c \
 		src/colour.c \
 		src/ingest.c \
 		src/grid_draw.c \
-		src/debug.c
+		src/debug.c \
+		src/rotaion.c \
+		src/constants.c \
+		src/projections.c \
+		src/math.c
 
 OBJS = $(SRCS:.c=.o)
 
