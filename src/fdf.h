@@ -91,6 +91,9 @@ int32_t ft_abs(int32_t num);
 void res_point(t_display *display, t_point *p);
 void gen_point(t_point *p, int32_t x, int32_t y, int32_t z, uint32_t colour);
 
+// draw pixel
+void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, int32_t colour)
+
 // drawing line
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
 int32_t get_step(int32_t p0, int32_t p1);

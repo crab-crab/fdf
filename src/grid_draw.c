@@ -21,7 +21,6 @@ void isometric(t_point *p)
 void res_point(t_display *display, t_point *p)
 {
 	isometric(p);
-	//p_point(p);
 	p->pix_x = (int32_t)((display->offset_x) + (p->x * display->zoom_factor));
 	p->pix_y = (int32_t)((display->offset_y) + (p->y * display->zoom_factor));
 	//p_point(p);
@@ -32,10 +31,32 @@ void gen_point(t_point *p, int32_t x, int32_t y, int32_t z, uint32_t colour)
 	p->x = (float)x;
 	p->y = (float)y;
 	p->z = (float)z;
-	if (colour != 0)
-		p->colour = colour;
-	else
-		p->colour = 0x80FFFF;
+	if (colour == 0)
+		p->colour = 0xFFFFFFFF;
+}
+
+/*draw a line between two horizontally adjacent nodes in map grid*/
+void connect_h(t_display	*display, uint32_t x, uint32_t y)
+{
+	gen_point(&(display->p0), x, y, 
+		display->map->node_arr[y][x].z, 
+		display->map->node_arr[y][x].colour);
+	gen_point(&(display->p1), x + 1, y, 
+		display->map->node_arr[y][x + 1].z, 
+		display->map->node_arr[y][x + 1].colour);
+	draw_update(display);
+}
+
+/*draw a line between two vertically adjacent nodes in map grid*/
+void connect_v(t_display	*display, uint32_t x, uint32_t y)
+{
+	gen_point(&(display->p0), x, y, 
+		display->map->node_arr[y][x].z, 
+		display->map->node_arr[y][x].colour);
+	gen_point(&(display->p1), x, y + 1, 
+		display->map->node_arr[y + 1][x].z, 
+		display->map->node_arr[y + 1][x].colour);
+	draw_update(display);
 }
 
 void draw_grid(t_display	*display)
