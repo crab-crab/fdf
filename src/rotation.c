@@ -42,5 +42,5 @@ void rotate_point(t_point *p, float rx, float ry, float rz)
 {
 	rotate_x(p, rx);
     rotate_y(p, ry);
-	rotate_z(p, rz);    
+	rotate_z(p, rz);
 }

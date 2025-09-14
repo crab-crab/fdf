@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/10 15:02:13 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/14 16:49:01 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@
 # define PI	3.1416
 # define WIDTH 2000
 # define HEIGHT 2000
-
-extern	t_proj ISO_PROJ;
-extern	t_proj TOPDOWN;
-extern	t_proj SIDE1;
-extern	t_proj SIDE2;
-extern	t_proj DIMETRIC;
-extern	t_proj PERSPECT;
-extern	t_proj CABINET;
 
 typedef struct s_node
 {
@@ -70,6 +62,13 @@ typedef struct s_line
     int32_t		err;
 } t_line;
 
+typedef struct s_proj
+{
+	float		rx;
+	float		ry;
+	float		rz;
+} t_proj;
+
 typedef struct s_display
 {
 	t_point		p0;
@@ -89,12 +88,7 @@ typedef struct s_display
 	mlx_image_t	*g_img;
 } t_display;
 
-typedef struct s_proj
-{
-	float		rx;
-	float		ry;
-	float		rz;
-} t_proj;
+
 
 typedef struct s_colour
 {
@@ -103,6 +97,15 @@ typedef struct s_colour
 	uint8_t	gg;
 	uint8_t	bb;
 } t_colour;
+
+// projections
+extern	t_proj ISO_PROJ;
+extern	t_proj TOPDOWN;
+extern	t_proj SIDE1;
+extern	t_proj SIDE2;
+extern	t_proj DIMETRIC;
+extern	t_proj PERSPECT;
+extern	t_proj CABINET;
 
 // map parsing
 int32_t parse_map(char *filename, t_map *map);
@@ -114,8 +117,11 @@ int32_t ft_abs(int32_t num);
 void res_point(t_display *display, t_point *p);
 void gen_point(t_point *p, int32_t x, int32_t y, int32_t z, uint32_t colour);
 
+// rotation
+void rotate_point(t_point *p, float rx, float ry, float rz);
+
 // draw pixel
-void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, int32_t colour)
+void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, int32_t colour);
 
 // drawing line
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
@@ -136,7 +142,6 @@ float weight_scuffed(t_point start, t_point p0, t_line line);
 // math
 float dtor(float degrees);
 float rtod(float radians);
-
 
 
 // debugging

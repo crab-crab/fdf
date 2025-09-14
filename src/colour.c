@@ -23,6 +23,18 @@ uint32_t	blend_rgb(t_colour *colour)
 	return result | 0xFF;
 }
 
+// /*combine 8-bit RGB values into 32 bit colour value*/
+// uint32_t	blend_rgb(t_colour *colour)
+// {
+// 	uint32_t	result;
+
+// 	result = 0;
+// 	result |= (0xFF << 24);
+// 	result |= (colour->rr << 16);
+// 	result |= (colour->gg << 8);
+// 	result |= (colour->bb);
+// 	return (result);
+// }
 
 uint8_t clampf_u8(float value)
 {
@@ -50,6 +62,28 @@ uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 	return (blend_rgb(&result));
 }
 
+float weight_scuffed(t_point start, t_point p0, t_line line)
+{
+	float p_x;
+	float p_y;
+
+	p_x = ft_abs(((float)p0.pix_x - (float)start.pix_x)) / (float)line.dx;
+	p_y = ft_abs(((float)p0.pix_y - (float)start.pix_y)) / (float)line.dy;
+
+	return ((p_x + p_y) / 2);
+}
+
+uint32_t get_colour(t_point p0, t_point p1, float weight)
+{
+	uint32_t colour;
+
+	colour = blend_colour(p0.colour, p1.colour, weight);
+	return (0xFF09FFFD);
+	// Transparency |  |  | RED
+	
+	return (colour);
+}
+
 // /*using floats*/
 // float get_weight(t_point p0, t_point p1, t_point start)
 // {
@@ -63,23 +97,6 @@ uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 // 	weight = (d0 / (d0 + d1));
 // 	return (weight);
 // }
-
-
-float weight_scuffed(t_point start, t_point p0, t_line line)
-{
-	float p_x;
-	float p_y;
-
-	p_x = ft_abs(((float)p0.pix_x - (float)start.pix_x)) / (float)line.dx;
-	p_y = ft_abs(((float)p0.pix_y - (float)start.pix_y)) / (float)line.dy;
-
-	if (p_x == 0)
-		return (p_y);
-	else if (p_y == 0)
-		return (p_x);
-	else
-		return ((p_x + p_y) / 2);
-}
 
 /*less float ops*/
 // float get_weight(t_point p, t_point p0, t_point p1)
@@ -95,18 +112,6 @@ float weight_scuffed(t_point start, t_point p0, t_line line)
 // 	den =  dx * dx + dy * dy;
 // 	return (num / den);
 // }
-
-uint32_t get_colour(t_point p0, t_point p1, float weight)
-{
-	uint32_t colour;
-
-	colour = blend_colour(p0.colour, p1.colour, weight);
-	
-	//return (0xFF00FF);
-	return (colour);
-}
-
-
 
 // void p_colour(uint32_t c)
 // {

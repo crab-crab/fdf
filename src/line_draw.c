@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:00:46 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/12 15:31:54 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/14 14:32:33 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int valid_point(t_point p0)
 	return (1); //debug
 	if (p0.pix_x >= 0 && p0.pix_x <= WIDTH && p0.pix_y >= 0 && p0.pix_y <= HEIGHT)
 		return (1);
-
 	else
 		return (0);
 }

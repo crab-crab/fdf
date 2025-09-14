@@ -1,7 +1,7 @@
 
 #include "fdf.h"
 
-t_proj	ISO_PROJ = {-0.61548, 0.785398, 0};
+t_proj	ISO_PROJ = {0.61548, -0.785398, 0};
 t_proj	TOPDOWN = {0, 0, 0};
 t_proj	SIDE1 = {0, 1.5708, 0};
 t_proj	SIDE2 = {1.5708, 0, 0};

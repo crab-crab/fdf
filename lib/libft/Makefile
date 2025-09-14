@@ -5,6 +5,9 @@ AR = ar
 ARFLAGS = rcs
 CFLAGS = -Wall -Wextra -Werror -g
 
+SRCDIR = .
+OBJDIR = obj
+
 # Source and Object Files
 SRCS =	ft_atoi.c \
 		ft_bzero.c \
@@ -49,7 +52,7 @@ SRCS =	ft_atoi.c \
 		pt_string.c \
 		pt_udecimal.c \
 		ft_uitoa.c \
-		hexa.c \
+		ft_hexa.c \
 		ft_lst_fill.c \
 		ft_lst_print.c \
 		ft_lstadd_back.c \
@@ -66,7 +69,8 @@ SRCS =	ft_atoi.c \
 		st_rotate.c \
 		st_swap.c
 	
-OBJS = $(SRCS:.c=.o)
+#OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 NAME = libft.a
 
 # set default target
@@ -78,18 +82,21 @@ $(NAME) : $(OBJS)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 # Compile source files into object files
-%.o: %.c
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 # clean up
 clean:
 	@echo "Cleaning Libft..."
-	rm -f $(OBJS) $(OBJS_BONUS)
+	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean
-	make
+re: fclean all
 
 .PHONY: all clean fclean re bonus

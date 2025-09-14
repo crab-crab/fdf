@@ -10,19 +10,23 @@ LIBFT = lib/libft
 HEADERS = -I ./include -I $(LIBMLX)/include -I $(LIBFT)
 LIBS = -L$(LIBMLX)/build -lmlx42 -L$(LIBFT) -lft -lglfw -pthread -lm
 
-SRCS =	src/main.c \
-		src/line_draw.c \
-		src/hook_test.c \
-		src/colour.c \
-		src/ingest.c \
-		src/grid_draw.c \
-		src/debug.c \
-		src/rotaion.c \
-		src/constants.c \
-		src/projections.c \
-		src/math.c
+SRCDIR = src
+OBJDIR = obj
 
-OBJS = $(SRCS:.c=.o)
+SRCS =	$(SRCDIR)/main.c \
+		$(SRCDIR)/line_draw.c \
+		$(SRCDIR)/hook_test.c \
+		$(SRCDIR)/colour.c \
+		$(SRCDIR)/ingest.c \
+		$(SRCDIR)/grid_draw.c \
+		$(SRCDIR)/debug.c \
+		$(SRCDIR)/rotation.c \
+		$(SRCDIR)/constants.c \
+		$(SRCDIR)/projections.c \
+		$(SRCDIR)/math.c
+
+# check wildcard usage (%)
+OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all: libmlx libft $(NAME)
 
@@ -32,8 +36,12 @@ libmlx:
 libft:
 	@$(MAKE) -C $(LIBFT)
 
-%.o: %.c
+# check wildcard usage (%)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
