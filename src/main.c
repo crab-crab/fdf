@@ -45,6 +45,8 @@ t_display	*init_display(t_map *map)
 	display->zoom_factor = dyn_zoom(display)/2;
 	display->offset_x = (WIDTH / 2) - 200;
 	display->offset_y = (HEIGHT / 2) - 200;
+	display->projection = TOPDOWN;
+	set_projection(display);
 
 	return (display);
 }
@@ -88,13 +90,11 @@ int main(void)
 	t_display	*display;
 	int	result;
 
-	char filename[100] = "test_maps/mars.fdf";
+	char filename[100] = "test_maps/pylone.fdf";
 	result = parse_map(filename, &map);
 	p_map(&map);
 
 	display = init_display(&map);
-	display->projection = ISO_PROJ;
-	set_projection(display);
 	
 	if (!display || !display->mlx || !display->g_img)
 		exit(EXIT_FAILURE);

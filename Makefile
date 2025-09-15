@@ -24,7 +24,8 @@ SRCS =	$(SRCDIR)/main.c \
 		$(SRCDIR)/constants.c \
 		$(SRCDIR)/projections.c \
 		$(SRCDIR)/math.c \
-		$(SRCDIR)/hook_input.c
+		$(SRCDIR)/hook_input.c \
+		$(SRCDIR)/draw_circle.c
 
 # check wildcard usage (%)
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

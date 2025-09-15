@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/01 15:11:56 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/15 18:06:57 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	ft_hextoi(const char *nptr)
 	long	result;
 
 	result = 0;
+	if (!nptr)
+		return (0);
 	while (*nptr != 'x')
 	{
 		if (!*nptr)

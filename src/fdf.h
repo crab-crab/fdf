@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/15 16:54:14 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/15 17:44:55 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define PI	3.1416
 # define WIDTH 2000
 # define HEIGHT 2000
-# define ROT_STEP 0.03
+# define ROT_STEP 0.001
 # define TRAN_STEP 10
 # define ZOOM_STEP 1.2
 
@@ -143,6 +143,7 @@ void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, int32_t colour
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
 int32_t get_step(int32_t p0, int32_t p1);
 void	draw_update(t_display	*display);
+void draw_circle(mlx_image_t *g_img, t_point p, int32_t r, uint8_t fill);
 
 // drawing grid
 void draw_grid(t_display	*display);

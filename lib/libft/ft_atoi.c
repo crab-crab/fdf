@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:17:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/06/30 14:33:09 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/15 18:05:57 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_atoi(const char *nptr)
 
 	result = 0;
 	sign = 1;
+	if (!nptr)
+		return (0);
 	while (*nptr == ' ' || *nptr == '\f' || *nptr == '\n'
 		|| *nptr == '\r' || *nptr == '\t' || *nptr == '\v')
 		nptr++;
@@ -33,11 +35,9 @@ int	ft_atoi(const char *nptr)
 	while (ft_isdigit(*nptr))
 	{
 		result *= 10;
-		result += *nptr - '0';
-		nptr++;
+		result += *nptr++ - '0';
 	}
-	result *= sign;
-	if (result > 2147483647 || result < -2147483648)
+	if (result > 2147483647 || (result > 2147483648 && sign == -1))
 		return (0);
-	return ((int)result);
+	return ((int)(result * sign));
 }
