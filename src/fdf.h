@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/14 16:49:01 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/15 16:54:14 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,29 @@
 # define PI	3.1416
 # define WIDTH 2000
 # define HEIGHT 2000
+# define ROT_STEP 0.03
+# define TRAN_STEP 10
+# define ZOOM_STEP 1.2
+
+# define BLACK 0x000000FF;
+# define WHITE 0xFFFFFFFF;
+
+typedef struct s_proj
+{
+	float		rx;
+	float		ry;
+	float		rz;
+} t_proj;
+
+# define ISO_PROJ		(t_proj){0.61548, -0.785398, 0}
+# define TOPDOWN		(t_proj){0, 0, 0}
+# define SIDE1			(t_proj){0, 1.5708, 0}
+# define SIDE2			(t_proj){1.5708, 0, 0}
+# define DIMETRIC		(t_proj){-0.523599, 0.785398, 0}
+# define PERSPECT 		(t_proj){-0.523599, 0.523599, 0}
+# define CABINET		(t_proj){0, 0.785398, 0}
+
+//const t_proj	PROJECTIONS[7] = {ISO_PROJ, TOPDOWN, SIDE1, SIDE2, DIMETRIC, PERSPECT, CABINET};
 
 typedef struct s_node
 {
@@ -62,13 +85,6 @@ typedef struct s_line
     int32_t		err;
 } t_line;
 
-typedef struct s_proj
-{
-	float		rx;
-	float		ry;
-	float		rz;
-} t_proj;
-
 typedef struct s_display
 {
 	t_point		p0;
@@ -98,14 +114,14 @@ typedef struct s_colour
 	uint8_t	bb;
 } t_colour;
 
-// projections
-extern	t_proj ISO_PROJ;
-extern	t_proj TOPDOWN;
-extern	t_proj SIDE1;
-extern	t_proj SIDE2;
-extern	t_proj DIMETRIC;
-extern	t_proj PERSPECT;
-extern	t_proj CABINET;
+// // projections
+// extern const	t_proj ISO_PROJ;
+// extern const	t_proj TOPDOWN;
+// extern const	t_proj SIDE1;
+// extern const	t_proj SIDE2;
+// extern const	t_proj DIMETRIC;
+// extern const	t_proj PERSPECT;
+// extern const	t_proj CABINET;
 
 // map parsing
 int32_t parse_map(char *filename, t_map *map);
@@ -142,6 +158,9 @@ float weight_scuffed(t_point start, t_point p0, t_line line);
 // math
 float dtor(float degrees);
 float rtod(float radians);
+
+// user input
+void user_input(t_display	*display);
 
 
 // debugging

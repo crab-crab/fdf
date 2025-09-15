@@ -60,7 +60,7 @@ void draw_circle(mlx_image_t *g_img, t_point p, int32_t r, uint8_t fill)
 		if (fill == 1)
 			circle_fill(g_img, p, x, y);
 		else
-			circle_points(g_img, p, x, y)
+			circle_points(g_img, p, x, y);
 		if (d < 0)
 			d += 2 * x + 3;
 		else
