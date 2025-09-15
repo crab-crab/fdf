@@ -29,6 +29,7 @@
 # define ROT_STEP 0.001
 # define TRAN_STEP 10
 # define ZOOM_STEP 1.2
+# define PATH_MAP "testmaps/"
 
 # define BLACK 0x000000FF;
 # define WHITE 0xFFFFFFFF;
@@ -139,14 +140,12 @@ void rotate_point(t_point *p, float rx, float ry, float rz);
 // draw pixel
 void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, int32_t colour);
 
-// drawing line
+// draw
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
 int32_t get_step(int32_t p0, int32_t p1);
 void	draw_update(t_display	*display);
-void draw_circle(mlx_image_t *g_img, t_point p, int32_t r, uint8_t fill);
-
-// drawing grid
-void draw_grid(t_display	*display);
+void	draw_circle(mlx_image_t *g_img, t_point p, int32_t r, uint8_t fill);
+void	draw_grid(t_display	*display);
 
 // hooks
 void	test_hook(void* display);

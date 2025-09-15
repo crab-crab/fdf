@@ -35,12 +35,26 @@ void	set_projection(t_display	*display)
 
 }
 
+void free_display(t_display	*display)
+{
+	free(display->mlx);
+	free(display->g_img);
+	free(display);
+}
+
 t_display	*init_display(t_map *map)
 {
 	t_display	*display;
-	display = (t_display*)malloc(sizeof(t_display));
+
+	display = (t_display*)ft_calloc(1, sizeof(t_display));
+	if (!display || !map)
+		return (NULL);
 	display->mlx = mlx_init(WIDTH, HEIGHT, "Chicken Coop", true);
+	if (!display->mlx)
+		return (free_display(display), NULL);
 	display->g_img = mlx_new_image(display->mlx, WIDTH, HEIGHT);
+	if (!display->g_img)
+		return (free_display(display), NULL);
 	display->map = map;
 	display->zoom_factor = dyn_zoom(display)/2;
 	display->offset_x = (WIDTH / 2) - 200;
@@ -51,7 +65,7 @@ t_display	*init_display(t_map *map)
 	return (display);
 }
 
-void black_screen(t_display	*display)
+void wipe_screen(t_display	*display, uint32_t colour)
 {
 	int x;
 	int y;
@@ -62,7 +76,7 @@ void black_screen(t_display	*display)
 		x = 0;
 		while (x < WIDTH)
 		{
-			draw_pixel(display->g_img, x, y, 0x000000FF);
+			draw_pixel(display->g_img, x, y, colour);
 			x++;
 		}
 		y++;
@@ -75,7 +89,7 @@ void hook(void *param)
 
 	display = param;
 	user_input(display);
-	black_screen(display);
+	wipe_screen(display, 0x000000FF);
 	draw_grid(display);
 }
 
@@ -84,20 +98,23 @@ Add
 	-Keyhooks
 */
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_map map;
 	t_display	*display;
 	int	result;
 
-	char filename[100] = "test_maps/pylone.fdf";
-	result = parse_map(filename, &map);
+	if (argc != 2)
+		return(write(1, "invalid args\n", 13));
+	
+	//char filename[100] = "test_maps/pylone.fdf";
+	//result = parse_map(filename, &map, argv[1]);
+	result = parse_map(argv[1], &map); // fit this directly into init_display call?
 	p_map(&map);
 
 	display = init_display(&map);
-	
-	if (!display || !display->mlx || !display->g_img)
-		exit(EXIT_FAILURE);
+	if (!display)
+		exit(EXIT_FAILURE); //check use of exit -> change to return?
 
 	mlx_image_to_window(display->mlx, display->g_img, 0, 0);
 	mlx_loop_hook(display->mlx, &hook, display);

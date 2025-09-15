@@ -12,6 +12,15 @@
 
 #include "fdf.h"
 
+int32_t ft_abs(int32_t num)
+{
+	if (num == INT32_MIN)
+		return (INT32_MAX);
+	if (num < 0)
+		num = -num;
+	return (num);
+}
+
 float dtor(float degrees)
 {
 	return ((degrees * PI) / 180);

@@ -14,18 +14,20 @@ SRCDIR = src
 OBJDIR = obj
 
 SRCS =	$(SRCDIR)/main.c \
-		$(SRCDIR)/line_draw.c \
-		$(SRCDIR)/hook_test.c \
 		$(SRCDIR)/colour.c \
-		$(SRCDIR)/ingest.c \
-		$(SRCDIR)/grid_draw.c \
-		$(SRCDIR)/debug.c \
+		$(SRCDIR)/draw_line.c \
+		$(SRCDIR)/draw_grid.c \
+		$(SRCDIR)/draw_circle.c \
 		$(SRCDIR)/rotation.c \
-		$(SRCDIR)/constants.c \
 		$(SRCDIR)/projections.c \
-		$(SRCDIR)/math.c \
+		$(SRCDIR)/hook_test.c \
 		$(SRCDIR)/hook_input.c \
-		$(SRCDIR)/draw_circle.c
+		$(SRCDIR)/ingest.c \
+		$(SRCDIR)/constants.c \
+		$(SRCDIR)/math.c \
+		$(SRCDIR)/debug.c
+		
+		
 
 # check wildcard usage (%)
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

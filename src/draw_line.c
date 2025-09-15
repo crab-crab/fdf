@@ -12,13 +12,6 @@
 
 #include "fdf.h"
 
-int32_t ft_abs(int32_t num)
-{
-	if (num < 0)
-		num = -num;
-	return (num);
-}
-
 int32_t get_step(int32_t p0, int32_t p1)
 {
 	int32_t step;
