@@ -30,19 +30,17 @@ char	*ft_strlchr(char *s, int c, size_t l)
 
 /*The atoi() function converts the initial portion of the string pointed to by
 nptr to int. Returns the converted value or 0 on error.*/
-int	ft_hextoi(const char *nptr)
+uint32_t	ft_hextoi(const char *nptr) //move to lib_ft?
 {
-	long	result;
+	uint64_t	result;
 
 	result = 0;
 	if (!nptr)
 		return (0);
 	while (*nptr != 'x')
-	{
-		if (!*nptr) //redundant?
-			return (0);
 		nptr++;
-	}
+	if (!*nptr)
+		return (0);
 	nptr++;
 	while (ft_isdigit(*nptr) || ft_isalpha(*nptr))
 	{
@@ -50,14 +48,14 @@ int	ft_hextoi(const char *nptr)
 		if (ft_isdigit(*nptr))
 			result += *nptr - '0';
 		else if (*nptr >= 'A' && *nptr <= 'F')
-			result += (*nptr - 'A') + 11;
+			result += (*nptr - 'A') + 10;
 		else if (*nptr >= 'a' && *nptr <= 'f')
-			result += (*nptr - 'a') + 11;
+			result += (*nptr - 'a') + 10;
 		nptr++;
 	}
-	if (result > 2147483647 || result < -2147483648)
+	if (result > UINT32_MAX)
 		return (0);
-	return ((int)result);
+	return ((uint32_t)result);
 }
 
 int	fill_buffer(char **buffer, int fd)

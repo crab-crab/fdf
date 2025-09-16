@@ -27,14 +27,6 @@ int dyn_zoom(t_display	*display)
 	return (WIDTH / hypo);
 }
 
-void	set_projection(t_display	*display)
-{
-	display->rx = display->projection.rx;
-	display->ry = display->projection.ry;
-	display->rz = display->projection.rz;
-
-}
-
 void hook(void *param)
 {
 	t_display	*display;

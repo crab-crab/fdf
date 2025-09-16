@@ -26,22 +26,12 @@ void rot_input(t_display	*display)
 		display->rz += ROT_STEP;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_E))
 		display->rz -= ROT_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_SPACE))
+		reset_display(display);
 }
 
-void trans_input(t_display	*display)
+void nodes_input(t_display	*display)
 {
-	if (mlx_is_key_down(display->mlx, MLX_KEY_RIGHT))
-		display->offset_x += TRAN_STEP;
-	if (mlx_is_key_down(display->mlx, MLX_KEY_LEFT))
-		display->offset_x -= TRAN_STEP;
-	if (mlx_is_key_down(display->mlx, MLX_KEY_DOWN))
-		display->offset_y += TRAN_STEP;
-	if (mlx_is_key_down(display->mlx, MLX_KEY_UP))
-		display->offset_y -= TRAN_STEP;
-	if (mlx_is_key_down(display->mlx, MLX_KEY_Z))
-		display->zoom_factor *= ZOOM_STEP;
-	if (mlx_is_key_down(display->mlx, MLX_KEY_X))
-		display->zoom_factor /= ZOOM_STEP;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_SEMICOLON))
 		display->node_fill *= -1;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_P))
@@ -58,11 +48,28 @@ void trans_input(t_display	*display)
 	}
 }
 
+void trans_input(t_display	*display)
+{
+	if (mlx_is_key_down(display->mlx, MLX_KEY_RIGHT))
+		display->offset_x += TRAN_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_LEFT))
+		display->offset_x -= TRAN_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_DOWN))
+		display->offset_y += TRAN_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_UP))
+		display->offset_y -= TRAN_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_Z))
+		display->zoom_factor *= ZOOM_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_X))
+		display->zoom_factor /= ZOOM_STEP;
+}
+
 void user_input(t_display	*display)
 {
 	if (mlx_is_key_down(display->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(display->mlx);
 
 	rot_input(display);
+	nodes_input(display);
 	trans_input(display);
 }

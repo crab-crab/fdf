@@ -1,5 +1,13 @@
 #include "fdf.h"
 
+void	set_projection(t_display	*display)
+{
+	display->rx = display->projection.rx;
+	display->ry = display->projection.ry;
+	display->rz = display->projection.rz;
+
+}
+
 void wipe_screen(t_display	*display, uint32_t colour)
 {
 	int x;
@@ -18,11 +26,31 @@ void wipe_screen(t_display	*display, uint32_t colour)
 	}
 }
 
-void free_display(t_display	*display)
+/*
+Check into MLX42 specific cleanup functions 
+mlx_terminate() mlx_delete_image()
+*/
+void free_display(t_display	**display_p)
 {
-	free(display->mlx);
-	free(display->g_img);
+	t_display *display = *display_p
+	
+	if (!display_ptr || !*display_ptr)
+        return;
+	
+	if (display->g_img)
+	{
+		free(display->g_img);
+		display->g_img = NULL;
+	}
+
+	if (display->mlx)
+	{
+		free(display->mlx);
+		display->mlx = NULL;
+	}
+	
 	free(display);
+	*display_p = NULL;
 }
 
 void reset_display(t_display	*display)
@@ -34,6 +62,7 @@ void reset_display(t_display	*display)
 	display->offset_x = (WIDTH / 2) - 200;
 	display->offset_y = (HEIGHT / 2) - 200;
 	display->projection = TOPDOWN;
+	set_projection(display);
 }
 
 
@@ -46,10 +75,10 @@ t_display	*init_display(t_map *map)
 		return (NULL);
 	display->mlx = mlx_init(WIDTH, HEIGHT, "Chicken Coop", true);
 	if (!display->mlx)
-		return (free_display(display), NULL);
+		return (free_display(&display), NULL);
 	display->g_img = mlx_new_image(display->mlx, WIDTH, HEIGHT);
 	if (!display->g_img)
-		return (free_display(display), NULL);
+		return (free_display(&display), NULL);
 	display->map = map;
 	//reset_display(display); //test
 	display->node = -1;

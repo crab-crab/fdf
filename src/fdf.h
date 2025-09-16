@@ -134,7 +134,7 @@ int32_t ft_abs(int32_t num);
 
 // display
 void reset_display(t_display	*display);
-void free_display(t_display	*display);
+void free_display(t_display	**display);
 t_display	*init_display(t_map *map);
 void wipe_screen(t_display	*display, uint32_t colour);
 
