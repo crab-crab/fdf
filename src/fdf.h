@@ -132,6 +132,12 @@ int32_t parse_map(char *filename, t_map *map);
 // math
 int32_t ft_abs(int32_t num);
 
+// display
+void reset_display(t_display	*display);
+void free_display(t_display	*display);
+t_display	*init_display(t_map *map);
+void wipe_screen(t_display	*display, uint32_t colour);
+
 // point generation
 void res_point(t_display *display, t_point *p);
 void gen_point(t_point *p, int32_t x, int32_t y, int32_t z, uint32_t colour);

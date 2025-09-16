@@ -14,6 +14,7 @@ SRCDIR = src
 OBJDIR = obj
 
 SRCS =	$(SRCDIR)/main.c \
+		$(SRCDIR)/display.c \
 		$(SRCDIR)/colour.c \
 		$(SRCDIR)/draw_line.c \
 		$(SRCDIR)/draw_grid.c \

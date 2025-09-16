@@ -35,59 +35,6 @@ void	set_projection(t_display	*display)
 
 }
 
-void free_display(t_display	*display)
-{
-	free(display->mlx);
-	free(display->g_img);
-	free(display);
-}
-
-
-
-t_display	*init_display(t_map *map)
-{
-	t_display	*display;
-
-	display = (t_display*)ft_calloc(1, sizeof(t_display));
-	if (!display || !map)
-		return (NULL);
-	display->mlx = mlx_init(WIDTH, HEIGHT, "Chicken Coop", true);
-	if (!display->mlx)
-		return (free_display(display), NULL);
-	display->g_img = mlx_new_image(display->mlx, WIDTH, HEIGHT);
-	if (!display->g_img)
-		return (free_display(display), NULL);
-	display->map = map;
-	display->node = -1;
-	display->node_fill = 1;
-	display->node_rad = 10;
-	display->zoom_factor = dyn_zoom(display)/2;
-	display->offset_x = (WIDTH / 2) - 200;
-	display->offset_y = (HEIGHT / 2) - 200;
-	display->projection = TOPDOWN;
-	set_projection(display);
-
-	return (display);
-}
-
-void wipe_screen(t_display	*display, uint32_t colour)
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			draw_pixel(display->g_img, x, y, colour);
-			x++;
-		}
-		y++;
-	}
-}
-
 void hook(void *param)
 {
 	t_display	*display;
