@@ -42,6 +42,8 @@ void free_display(t_display	*display)
 	free(display);
 }
 
+
+
 t_display	*init_display(t_map *map)
 {
 	t_display	*display;
@@ -56,6 +58,9 @@ t_display	*init_display(t_map *map)
 	if (!display->g_img)
 		return (free_display(display), NULL);
 	display->map = map;
+	display->node = -1;
+	display->node_fill = 1;
+	display->node_rad = 10;
 	display->zoom_factor = dyn_zoom(display)/2;
 	display->offset_x = (WIDTH / 2) - 200;
 	display->offset_y = (HEIGHT / 2) - 200;
@@ -89,7 +94,7 @@ void hook(void *param)
 
 	display = param;
 	user_input(display);
-	wipe_screen(display, 0x000000FF);
+	wipe_screen(display, 0x606060FF);
 	draw_grid(display);
 }
 

@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/15 18:06:57 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/16 15:15:27 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,10 @@ int32_t parse_map(char *filename, t_map *map)
 	uint32_t	j;
 
 	buffer = NULL;
-	path = ft_strjoin(PATH_MAP, filename) // combine this line and the following?
+	path = ft_strjoin(PATH_MAP, filename); // combine this line and the following?
 	fd = open(path, O_RDONLY);
-	return(printf("fd:%d, filename: %s", fd, path));
+	printf("fd:%d, filename: '%s'\n", fd, path);
+	//return(printf("fd:%d, filename: '%s'\n", fd, path));
 	if (fd < 0)
 		return (free(path), write(1, "file open error\n", 16));
 	if (fill_buffer(&buffer, fd) < 0)
@@ -172,32 +173,32 @@ int32_t parse_map(char *filename, t_map *map)
 	return (1);
 }
 
-int fill_map(t_map *map, char	**text)
-{
-	int	i;
-	int j;
-	char *line;
+// int fill_map(t_map *map, char	**text)
+// {
+// 	int	i;
+// 	int j;
+// 	char *line;
 
-	i = 0;
-	while (i < map->size_y)
-	{
-		j = 0;
-		map->node_arr[i] = ft_calloc(map->size_x, sizeof(t_node)); // guard with adding a NULL on the end of each row/column?
-		line = ft_split(text[i], ' '); // check for split malloc fail return -> confirm it even will return a NULL properly
-		if (!line || !map->node_arr[i])
-			return (free(line), -1);
-		while (j < map->size_x) // split into a fill_map helper -> consider storing x and y directly
-		{
-			map->node_arr[i][j].z = ft_atoi(line[j]);
-			if (map->node_arr[i][j].z > map->max_z)
-				map->max_z = map->node_arr[i][j].z;
-			if (map->node_arr[i][j].z < map->min_z)
-				map->min_z = map->node_arr[i][j].z;
-			map->node_arr[i][j].colour = ft_hextoi(line[j]);
-			free(line[j]);
-			j++; //incorporate into while statement increment?
-		}
-		i++;
-	}
-	return (1);
-}
+// 	i = 0;
+// 	while (i < map->size_y)
+// 	{
+// 		j = 0;
+// 		map->node_arr[i] = ft_calloc(map->size_x, sizeof(t_node)); // guard with adding a NULL on the end of each row/column?
+// 		line = ft_split(text[i], ' '); // check for split malloc fail return -> confirm it even will return a NULL properly
+// 		if (!line || !map->node_arr[i])
+// 			return (free(line), -1);
+// 		while (j < map->size_x) // split into a fill_map helper -> consider storing x and y directly
+// 		{
+// 			map->node_arr[i][j].z = ft_atoi(line[j]);
+// 			if (map->node_arr[i][j].z > map->max_z)
+// 				map->max_z = map->node_arr[i][j].z;
+// 			if (map->node_arr[i][j].z < map->min_z)
+// 				map->min_z = map->node_arr[i][j].z;
+// 			map->node_arr[i][j].colour = ft_hextoi(line[j]);
+// 			free(line[j]);
+// 			j++; //incorporate into while statement increment?
+// 		}
+// 		i++;
+// 	}
+// 	return (1);
+// }

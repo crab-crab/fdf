@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/15 17:44:55 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/16 17:17:10 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 # define PI	3.1416
 # define WIDTH 2000
 # define HEIGHT 2000
-# define ROT_STEP 0.001
+# define BORDER 50
+# define ROT_STEP 0.03
 # define TRAN_STEP 10
 # define ZOOM_STEP 1.2
-# define PATH_MAP "testmaps/"
+# define PATH_MAP "test_maps/"
 
 # define BLACK 0x000000FF;
 # define WHITE 0xFFFFFFFF;
@@ -97,9 +98,10 @@ typedef struct s_display
 	float		ry;
 	float		rz;
 	float		zoom_factor;
-	uint8_t		dynamic_zoom;
-	uint8_t		node;
-	uint8_t		node_fill;
+	int8_t		dynamic_zoom;
+	int8_t		node;
+	int8_t		node_fill;
+	uint32_t	node_rad;
 	t_map		*map;
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
@@ -138,7 +140,7 @@ void gen_point(t_point *p, int32_t x, int32_t y, int32_t z, uint32_t colour);
 void rotate_point(t_point *p, float rx, float ry, float rz);
 
 // draw pixel
-void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, int32_t colour);
+void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, uint32_t colour);
 
 // draw
 void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
@@ -154,6 +156,7 @@ void	grid_hook(void* display);
 // colours
 uint32_t get_colour(t_point p0, t_point p1, float weight);
 float weight_scuffed(t_point start, t_point p0, t_line line);
+float get_weight(t_point p, t_point p0, t_point p1);
 
 // math
 float dtor(float degrees);

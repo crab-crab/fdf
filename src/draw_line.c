@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_draw.c                                        :+:      :+:    :+:   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:00:46 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/14 14:32:33 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/16 17:16:42 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void init_line(t_line *line, t_point p0, t_point p1)
 	line->err = line->dx - line->dy;
 }
 
-void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, int32_t colour)
+void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, uint32_t colour)
 {
-	if (pix_x >= 0 && pix_x <= WIDTH && pix_y >= 0 && pix_y <= HEIGHT)
+	if (pix_x >= 0 + BORDER && pix_x <= WIDTH - BORDER && pix_y >= 0 + BORDER && pix_y <= HEIGHT - BORDER)
 		mlx_put_pixel(g_img, pix_x, pix_y, colour);
 
 }
@@ -50,7 +50,7 @@ void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img)
 	init_line(&line, p0, p1);
 	while (p0.pix_x != p1.pix_x || p0.pix_y != p1.pix_y)
     {
-        draw_pixel(g_img, p0.pix_x, p0.pix_y, get_colour(p0, p1, weight_scuffed(start, p0, line)));
+        draw_pixel(g_img, p0.pix_x, p0.pix_y, get_colour(p0, p1, get_weight(p0, start, p1)));
 		e2 = 2 * line.err;
 		if (e2 > -line.dy)
 		{
@@ -63,7 +63,7 @@ void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img)
 			p0.pix_y += line.stepy;
 		}
 	}
-	draw_pixel(g_img, p0.pix_x, p0.pix_y, get_colour(p0, p1, weight_scuffed(start, p0, line)));
+	draw_pixel(g_img, p0.pix_x, p0.pix_y, get_colour(p0, p1, get_weight(p0, start, p1)));
 }
 
 int valid_point(t_point p0)

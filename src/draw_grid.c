@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grid_draw.c                                        :+:      :+:    :+:   */
+/*   draw_grid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:40 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/15 17:49:07 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/16 15:58:54 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ void draw_grid(t_display	*display)
 				connect_h(display, x, y);
 			if (y < display->map->size_y - 1)
 				connect_v(display, x, y);
-			//draw_circle(display->g_img, display->p0, 10, 1);
+			if (display->node > 0)
+			{
+				draw_circle(display->g_img, display->p0, display->node_rad, display->node_fill);
+			}
 			x++;
 		}
 		y++;

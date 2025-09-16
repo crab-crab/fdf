@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:12:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/15 16:50:55 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/16 16:15:04 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,32 @@ void rot_input(t_display	*display)
 
 void trans_input(t_display	*display)
 {
-	if (mlx_is_key_down(display->mlx, MLX_KEY_UP))
-		display->offset_x += TRAN_STEP;
-	if (mlx_is_key_down(display->mlx, MLX_KEY_DOWN))
-		display->offset_x -= TRAN_STEP;
-	if (mlx_is_key_down(display->mlx, MLX_KEY_LEFT))
-		display->offset_y += TRAN_STEP;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_RIGHT))
+		display->offset_x += TRAN_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_LEFT))
+		display->offset_x -= TRAN_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_DOWN))
+		display->offset_y += TRAN_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_UP))
 		display->offset_y -= TRAN_STEP;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_Z))
 		display->zoom_factor *= ZOOM_STEP;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_X))
 		display->zoom_factor /= ZOOM_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_SEMICOLON))
+		display->node_fill *= -1;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_P))
+		display->node *= -1;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_O))
+	{
+		if (display->node_rad > 0)
+			display->node_rad--;
+	}
+	if (mlx_is_key_down(display->mlx, MLX_KEY_L))
+	{
+		if (display->node_rad < WIDTH / 3)
+			display->node_rad++;
+	}
 }
 
 void user_input(t_display	*display)

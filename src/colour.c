@@ -59,7 +59,9 @@ uint32_t blend_colour(uint32_t p0, uint32_t p1, float weight)
 	result.rr = clampf_u8((weight * c1.rr) + ((1 - weight) * c0.rr));
 	result.gg = clampf_u8((weight * c1.gg) + ((1 - weight) * c0.gg));
 	result.bb = clampf_u8((weight * c1.bb) + ((1 - weight) * c0.bb));
-	return (blend_rgb(&result));
+	uint32_t colour = blend_rgb(&result);
+	//printf("colour: %d\n", colour);
+	return (colour);
 }
 
 float weight_scuffed(t_point start, t_point p0, t_line line)
@@ -73,13 +75,27 @@ float weight_scuffed(t_point start, t_point p0, t_line line)
 	return ((p_x + p_y) / 2);
 }
 
+/*less float ops*/
+float get_weight(t_point p, t_point p0, t_point p1)
+{
+	float dx;
+	float dy;
+	float num;
+	float den;
+
+	dx = p1.pix_x - p0.pix_x;
+	dy = p1.pix_y - p0.pix_y;
+	num = ((p.pix_x - p0.pix_x) * dx + (p.pix_y - p0.pix_y) * dy);
+	den =  dx * dx + dy * dy;
+	return (num / den);
+}
+
 uint32_t get_colour(t_point p0, t_point p1, float weight)
 {
 	uint32_t colour;
 
 	colour = blend_colour(p0.colour, p1.colour, weight);
-	return (0xFF09FFFD);
-	// Transparency |  |  | RED
+	//return (0xFF09FFFD);
 	
 	return (colour);
 }
@@ -98,20 +114,7 @@ uint32_t get_colour(t_point p0, t_point p1, float weight)
 // 	return (weight);
 // }
 
-/*less float ops*/
-// float get_weight(t_point p, t_point p0, t_point p1)
-// {
-// 	float dx;
-// 	float dy;
-// 	float num;
-// 	float den;
 
-// 	dx = p1.pix_x - p0.pix_x;
-// 	dy = p1.pix_y - p0.pix_y;
-// 	num = ((p.pix_x - p0.pix_x) * dx + (p.pix_y - p0.pix_y) * dy);
-// 	den =  dx * dx + dy * dy;
-// 	return (num / den);
-// }
 
 // void p_colour(uint32_t c)
 // {
