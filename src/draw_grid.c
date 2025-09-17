@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:40 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/16 15:58:54 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/17 15:25:57 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void isometric(t_point *p)
 {
-	int32_t temp_x;
-	int32_t temp_y;
+	float temp_x;
+	float temp_y;
 
 	temp_x = p->x;
 	temp_y = p->y;
@@ -28,8 +28,8 @@ void isometric(t_point *p)
 // take display rotation parameters and pass to rotate point
 void res_point(t_display *display, t_point *p)
 {
-	//isometric(p);
 	rotate_point(p, display->rx, display->ry, display->rz);
+	isometric(p);
 
 	p->pix_x = (int32_t)((display->offset_x) + (p->x * display->zoom_factor));
 	p->pix_y = (int32_t)((display->offset_y) + (p->y * display->zoom_factor));
@@ -92,6 +92,10 @@ void draw_grid(t_display	*display)
 				connect_v(display, x, y);
 			if (display->node > 0)
 			{
+				gen_point(&(display->p0), x, y, 
+					display->map->node_arr[y][x].z, 
+					display->map->node_arr[y][x].colour);
+				res_point(display, &(display->p0));
 				draw_circle(display->g_img, display->p0, display->node_rad, display->node_fill);
 			}
 			x++;

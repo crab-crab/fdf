@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:18:04 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/10 14:55:52 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/17 15:07:12 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,12 @@ void p_map(t_map *map)
 		printf("\n");
 		i++;
 	}
+}
+
+void p_colour(uint32_t c)
+{
+	t_colour colour;
+	
+	get_rgb(c, &colour);
+	printf("Colour %u | R%d G%d B%d\n", c, colour.rr, colour.gg, colour.bb);
 }

@@ -32,9 +32,9 @@ mlx_terminate() mlx_delete_image()
 */
 void free_display(t_display	**display_p)
 {
-	t_display *display = *display_p
+	t_display *display = *display_p;
 	
-	if (!display_ptr || !*display_ptr)
+	if (!display_p || !*display_p)
         return;
 	
 	if (display->g_img)
@@ -51,6 +51,15 @@ void free_display(t_display	**display_p)
 	
 	free(display);
 	*display_p = NULL;
+}
+
+int dyn_zoom(t_display	*display)
+{
+	int hypo;
+
+	hypo = sqrt((display->map->size_x * display->map->size_x) + (display->map->size_y * display->map->size_y));
+
+	return (WIDTH / hypo);
 }
 
 void reset_display(t_display	*display)
@@ -80,14 +89,8 @@ t_display	*init_display(t_map *map)
 	if (!display->g_img)
 		return (free_display(&display), NULL);
 	display->map = map;
-	//reset_display(display); //test
-	display->node = -1;
-	display->node_fill = 1;
-	display->node_rad = 10;
-	display->zoom_factor = dyn_zoom(display)/2;
-	display->offset_x = (WIDTH / 2) - 200;
-	display->offset_y = (HEIGHT / 2) - 200;
-	display->projection = TOPDOWN;
+	reset_display(display); //test
+
 	set_projection(display);
 
 	return (display);

@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/16 17:17:10 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/17 15:33:13 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ typedef struct s_display
 
 typedef struct s_colour
 {
-	uint8_t	aa;
 	uint8_t	rr;
 	uint8_t	gg;
 	uint8_t	bb;
+	uint8_t	aa;
 } t_colour;
 
 // // projections

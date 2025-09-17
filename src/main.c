@@ -18,14 +18,7 @@
 // 	return (EXIT_SUCCESS);
 // }
 
-int dyn_zoom(t_display	*display)
-{
-	int hypo;
 
-	hypo = sqrt((display->map->size_x * display->map->size_x) + (display->map->size_y * display->map->size_y));
-
-	return (WIDTH / hypo);
-}
 
 void hook(void *param)
 {
