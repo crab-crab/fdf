@@ -25,14 +25,13 @@ void reset_node(t_node *node)
 	node->z = node->z_orig * display->height_scale;
 }
 
-
 void resolve_node(t_display *display, t_node *node)
 {
 	
 	node->x = node->x_orig;
 	node->y = node->y_orig;
 	node->z = node->z_orig * display->height_scale;
-	rotate_node(node, display->rx, display->ry, display->rz);
+	rotate_node(node, display);
 	isometric_n(node);
 
 	node->pix_x = (int32_t)((display->offset_x) + (node->pix_x * display->zoom_factor));

@@ -106,6 +106,12 @@ typedef struct s_display
 	float		rx;
 	float		ry;
 	float		rz;
+	float		cos_rx;
+	float		sin_rx;
+	float		cos_ry;
+	float		sin_ry;
+	float		cos_rz;
+	float		sin_rz;
 	float		zoom_factor;
 	float		height_scale;
 	int8_t		dynamic_zoom;
@@ -157,7 +163,7 @@ void gen_point(t_point *p, t_node *node);
 
 // rotation
 void rotate_point(t_point *p, float rx, float ry, float rz);
-void rotate_node(t_node *node, float rx, float ry, float rz);
+void rotate_node(t_node *node, t_display *display);
 
 // projection
 void isometric_n(t_node *node, int32_t *x_pix, int32_t *y_pix);

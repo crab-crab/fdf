@@ -37,6 +37,12 @@ void update_grid(t_display	*display)
 	size = (display->map->size_x * display->map->size_y);
 
 	index = 0;
+	display->cos_rx = cos(rx);
+	display->sin_rx = sin(rx);
+	display->cos_ry = cos(ry);
+	display->sin_ry = sin(ry);
+	display->cos_rz = cos(rz);
+	display->sin_rz = sin(rz);
 	while (index < size)
 	{
 		resolve_node(display, &display->map->nodes[index]);
