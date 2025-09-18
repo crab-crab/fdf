@@ -24,16 +24,10 @@
 // 	p->y = ((temp_x + temp_y) * sin(0.523599) - p->z);
 // }
 
-void isometric_n(t_node *node)
+void isometric_n(t_node *node, int32_t *x_pix, int32_t *y_pix)
 {
-	float temp_x;
-	float temp_y;
-
-	temp_x = node->x;
-	temp_y = node->y;
-	
-	node->x = ((temp_x - temp_y) * cos(0.523599));
-	node->y = ((temp_x + temp_y) * sin(0.523599) - node->z);
+	node->pix_x = ((node->x - node->y) * cos(0.523599));
+	node->pix_y = ((node->x + node->y) * sin(0.523599) - node->z);
 }
 
 // move to rotation/drawing/rendering
@@ -50,14 +44,15 @@ void isometric_n(t_node *node)
 
 void resolve_node(t_display *display, t_node *node)
 {
+	
 	node->x = node->x_orig;
 	node->y = node->y_orig;
 	node->z = node->z_orig * display->height_scale;
 	rotate_node(node, display->rx, display->ry, display->rz);
 	isometric_n(node);
 
-	node->pix_x = (int32_t)((display->offset_x) + (node->x * display->zoom_factor));
-	node->pix_y = (int32_t)((display->offset_y) + (node->y * display->zoom_factor));
+	node->pix_x = (int32_t)((display->offset_x) + (node->pix_x * display->zoom_factor));
+	node->pix_y = (int32_t)((display->offset_y) + (node->pix_y * display->zoom_factor));
 }
 
 // void gen_point(t_point *p, t_node *node)
@@ -71,7 +66,7 @@ void resolve_node(t_display *display, t_node *node)
 /*draw a line between two horizontally adjacent nodes in map grid*/
 void connect_h(t_display	*display, uint32_t x, uint32_t y)
 {
-	display->p0 = &display->map->nodes[get_index(x, y, display->map)];
+	//display->p0 = &display->map->nodes[get_index(x, y, display->map)];
 	display->p1 = &display->map->nodes[get_index(x + 1, y, display->map)];
 	draw_update(display);
 }
@@ -79,7 +74,7 @@ void connect_h(t_display	*display, uint32_t x, uint32_t y)
 /*draw a line between two vertically adjacent nodes in map grid*/
 void connect_v(t_display	*display, uint32_t x, uint32_t y)
 {
-	display->p0 = &display->map->nodes[get_index(x, y, display->map)];
+	//display->p0 = &display->map->nodes[get_index(x, y, display->map)];
 	display->p1 = &display->map->nodes[get_index(x, y + 1, display->map)];
 	draw_update(display);
 }
@@ -117,7 +112,7 @@ void draw_grid(t_display	*display)
 		x = 0;
 		while (x < display->map->size_x)
 		{
-			
+			display->p0 = &display->map->nodes[get_index(x, y, display->map)];
 			if (x < display->map->size_x - 1)
 				connect_h(display, x, y);
 			if (y < display->map->size_y - 1)

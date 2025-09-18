@@ -2,7 +2,9 @@
 
 NAME = tutorial
 CC = cc
-CFLAGS = -g -Wall -Wextra #-Werror
+
+# -O2 to fold constant math functions
+CFLAGS = -O2 -g -Wall -Wextra #-Werror
 
 LIBMLX = lib/MLX42
 LIBFT = lib/libft
