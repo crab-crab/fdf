@@ -159,6 +159,10 @@ void gen_point(t_point *p, t_node *node);
 void rotate_point(t_point *p, float rx, float ry, float rz);
 void rotate_node(t_node *node, float rx, float ry, float rz);
 
+// projection
+void isometric_n(t_node *node, int32_t *x_pix, int32_t *y_pix);
+void resolve_node(t_display *display, t_node *node);
+
 // draw pixel
 void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, uint32_t colour);
 
