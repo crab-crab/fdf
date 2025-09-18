@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:40 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/18 20:20:05 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/18 21:11:35 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void update_grid(t_display	*display)
 	size = (display->map->size_x * display->map->size_y);
 
 	index = 0;
-	while (index < size -1)
+	while (index < size)
 	{
 		resolve_node(display, &display->map->nodes[index]);
 		index++;

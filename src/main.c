@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 	//char filename[100] = "test_maps/pylone.fdf";
 	//result = parse_map(filename, &map, argv[1]);
 	result = parse_map(argv[1], &map); // fit this directly into init_display call?
-	//p_map(&map);
+	p_map(&map);
 
 	display = init_display(&map);
 	if (!display)

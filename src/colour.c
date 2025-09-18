@@ -63,9 +63,9 @@ uint32_t blend_colour(t_node node_0, t_node node_1, float weight)
 	uint8_t gg;
 	uint8_t bb;
 	
-	rr = clampf_u8((weight * node_0.rr) + ((1 - weight) * node_1.rr));
-	gg = clampf_u8((weight * node_0.gg) + ((1 - weight) * node_1.gg));
-	bb = clampf_u8((weight * node_0.bb) + ((1 - weight) * node_1.bb));
+	rr = clampf_u8((weight * node_1.rr) + ((1 - weight) * node_0.rr));
+	gg = clampf_u8((weight * node_1.gg) + ((1 - weight) * node_0.gg));
+	bb = clampf_u8((weight * node_1.bb) + ((1 - weight) * node_0.bb));
 	return (blend_rgb(rr, gg, bb, 255));
 }
 
