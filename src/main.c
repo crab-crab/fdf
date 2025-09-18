@@ -2,24 +2,6 @@
 
 
 
-// int32_t	main(void)
-// {
-// 	t_display	*display;q
-	
-// 	display = (t_display*)malloc(sizeof(t_display));
-// 	display->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-// 	if (!display->mlx)
-// 		exit(EXIT_FAILURE);
-// 	display->g_img = mlx_new_image(display->mlx, 2000, 2000);
-// 	mlx_image_to_window(display->mlx, display->g_img, 0, 0);
-// 	mlx_loop_hook(display->mlx, &test_hook, display);
-// 	mlx_loop(display->mlx);
-// 	mlx_terminate(display->mlx);
-// 	return (EXIT_SUCCESS);
-// }
-
-
-
 void hook(void *param)
 {
 	t_display	*display;
