@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/17 15:09:50 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/18 18:30:20 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,53 @@ int32_t		count_cells(char *txt, char c)
 	return (i);
 }
 
+// t_node *get_node(int32_t x, int32_t y, t_map *map)
+// {
+// 	return (&map->nodes[y * map->size_x + x]);
+// }
+
+uint32_t get_index(int32_t x, int32_t y, t_map *map)
+{
+	return (y * map->size_x + x);
+}
+
+int fill_map(t_map *map, char	**text)
+{
+	uint32_t	i_y;
+	uint32_t	i_x;
+	uint32_t	index;
+	char **line;
+
+	i_y = 0;
+	while (i_y < map->size_y)
+	{
+		i_x = 0;
+		line = ft_split(text[i_y], ' '); // check for split malloc fail return -> confirm it even will return a NULL properly
+		while (i_x < map->size_x)
+		{
+			index = i_y * map->size_x + i_x;
+			map->nodes[index].x_orig = i_x;
+			map->nodes[index].y_orig = i_y;
+			map->nodes[index].z_orig = ft_atoi(line[i_x]);
+			map->nodes[index].aa = 255;
+			if (map->nodes[index].z_orig > map->max_z)
+				map->max_z = map->nodes[index].z_orig;
+			if (map->nodes[index].z_orig < map->min_z)
+				map->min_z = map->nodes[index].z_orig;
+			map->nodes[index].colour = ft_hextoi(line[i_x]);
+			set_rgb(ft_hextoi(line[i_x]), &map->nodes[index]);
+			map->nodes[index].colour = blend_rgb(&map->nodes[index]);
+
+			
+			free(line[i_x]);
+			i_x++; //incorporate into while statement increment?
+		}
+		free(line);
+		i_y++;
+	}
+	return (1);
+}
+
 int32_t parse_map(char *filename, t_map *map)
 {
 	uint32_t	fd;
@@ -128,15 +175,11 @@ int32_t parse_map(char *filename, t_map *map)
 	char		*buffer;
 	//ssize_t		bytes_read;
 	char		**text;
-	char		**line;
-	uint32_t	i;
-	uint32_t	j;
 
 	buffer = NULL;
 	path = ft_strjoin(PATH_MAP, filename); // combine this line and the following?
 	fd = open(path, O_RDONLY);
-	printf("fd:%d, filename: '%s'\n", fd, path);
-	//return(printf("fd:%d, filename: '%s'\n", fd, path));
+	printf("fd:%d, filename: '%s'\n", fd, path); // testing
 	if (fd < 0)
 		return (free(path), write(1, "file open error\n", 16));
 	if (fill_buffer(&buffer, fd) < 0)
@@ -145,58 +188,11 @@ int32_t parse_map(char *filename, t_map *map)
 	free(buffer);
 	if (!*text)
 		return (-1);
-	
 	map->size_y = ft_size(text);
 	map->size_x = count_cells(*text, ' ');
-	map->node_arr = ft_calloc(map->size_y, sizeof(t_node *));
-	i = 0;
-	while (i < map->size_y)
-	{
-		j = 0;
-		map->node_arr[i] = ft_calloc(map->size_x, sizeof(t_node)); // guard with adding a NULL on the end of each row/column?
-		line = ft_split(text[i], ' '); // check for split malloc fail return -> confirm it even will return a NULL properly
-		while (j < map->size_x) // split into a fill_map helper -> consider storing x and y directly
-		{
-			map->node_arr[i][j].z = ft_atoi(line[j]);
-			if (map->node_arr[i][j].z > map->max_z)
-				map->max_z = map->node_arr[i][j].z;
-			if (map->node_arr[i][j].z < map->min_z)
-				map->min_z = map->node_arr[i][j].z;
-			map->node_arr[i][j].colour = ft_hextoi(line[j]);
-			free(line[j]);
-			j++;
-		}
-		i++;
-	}
+	map->nodes = ft_calloc(map->size_x * map->size_y, sizeof(t_node));
+	fill_map(map, text);
 	return (1);
 }
 
-int fill_map(t_map *map, char	**text)
-{
-	uint32_t	i;
-	uint32_t j;
-	char **line;
 
-	i = 0;
-	while (i < map->size_y)
-	{
-		j = 0;
-		map->node_arr[i] = ft_calloc(map->size_x, sizeof(t_node)); // guard with adding a NULL on the end of each row/column?
-		line = ft_split(text[i], ' '); // check for split malloc fail return -> confirm it even will return a NULL properly
-		if (!line || !map->node_arr[i])
-			return (free(line), -1);
-		while (j < map->size_x) // split into a fill_map helper -> consider storing x and y directly
-		{
-			map->node_arr[i][j].z = ft_atoi(line[j]);
-			if (map->node_arr[i][j].z > map->max_z)
-				map->max_z = map->node_arr[i][j].z;
-			if (map->node_arr[i][j].z < map->min_z)
-				map->min_z = map->node_arr[i][j].z;
-			map->node_arr[i][j].colour = ft_hextoi(line[j]);
-			free(line[j]);
-			j++; //incorporate into while statement increment?
-		}
-		i++;
-	}
-	return (1);
-}

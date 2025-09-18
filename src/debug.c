@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:18:04 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/17 15:07:12 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/18 17:57:50 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void p_map(t_map *map)
 {
 	uint32_t i = 0;
 	uint32_t j;
+	uint32_t index;
 	
 	if (!map)
 	{
@@ -41,7 +42,8 @@ void p_map(t_map *map)
 		j = 0;
 		while (j < map->size_x)
 		{
-			printf("%d,%d ", map->node_arr[i][j].z, map->node_arr[i][j].colour);
+			index = i * map->size_x + j;
+			printf("%d,%d ", map->nodes[index].z_orig, map->nodes[index].colour);
 			j++;
 		}
 		printf("\n");
@@ -49,10 +51,10 @@ void p_map(t_map *map)
 	}
 }
 
-void p_colour(uint32_t c)
-{
-	t_colour colour;
+// void p_colour(uint32_t c)
+// {
+// 	t_colour colour;
 	
-	get_rgb(c, &colour);
-	printf("Colour %u | R%d G%d B%d\n", c, colour.rr, colour.gg, colour.bb);
-}
+// 	get_rgb(c, &colour);
+// 	printf("Colour %u | R%d G%d B%d\n", c, colour.rr, colour.gg, colour.bb);
+// }

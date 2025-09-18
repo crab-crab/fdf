@@ -12,7 +12,7 @@ void simple_line_h(mlx_image_t *g_img, int32_t x, int32_t y, int32_t len, uint32
 	}
 }
 
-void circle_fill(mlx_image_t *g_img, t_point p, int32_t x, int32_t y)
+void circle_fill(mlx_image_t *g_img, t_node p, int32_t x, int32_t y)
 {
 	int32_t cx;
 	int32_t cy;
@@ -25,7 +25,7 @@ void circle_fill(mlx_image_t *g_img, t_point p, int32_t x, int32_t y)
 	simple_line_h(g_img, cx - y, cy - x, (2 * y), p.colour);
 }
 
-void circle_points(mlx_image_t *g_img, t_point p, int32_t x, int32_t y)
+void circle_points(mlx_image_t *g_img, t_node p, int32_t x, int32_t y)
 {
 	int32_t cx;
 	int32_t cy;
@@ -46,7 +46,7 @@ void circle_points(mlx_image_t *g_img, t_point p, int32_t x, int32_t y)
 Draws circle outline by plotting 8 rotationally symetrical points for 45deg
 -> trying to connect points and draw 4 horizontal lines instead
 */
-void draw_circle(mlx_image_t *g_img, t_point p, int32_t r, uint8_t fill)
+void draw_circle(mlx_image_t *g_img, t_node p, int32_t r, uint8_t fill)
 {
 	int32_t x;
 	int32_t y;

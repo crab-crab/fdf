@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/17 15:33:13 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/18 20:18:24 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define ROT_STEP 0.03
 # define TRAN_STEP 10
 # define ZOOM_STEP 1.2
+# define NODE_RADIUS 5
+# define HEIGHT_SCALE 1
 # define PATH_MAP "test_maps/"
 
 # define BLACK 0x000000FF;
@@ -54,18 +56,25 @@ typedef struct s_proj
 
 typedef struct s_node
 {
-	int32_t		z;
-	uint32_t	colour;
-} t_node;
-
-typedef struct s_point
-{
+	int32_t		x_orig;
+	int32_t		y_orig;
+	int32_t		z_orig;
 	float		x;
 	float		y;
 	float		z;
 	int32_t		pix_x;
 	int32_t		pix_y;
-	uint32_t	colour;
+	uint32_t 	colour;
+	uint8_t		aa;
+	uint8_t		rr;
+	uint8_t		gg;
+	uint8_t		bb;
+} t_node;
+
+typedef struct s_point
+{
+	int32_t		pix_x;
+	int32_t		pix_y;
 } t_point;
 
 typedef struct s_map
@@ -74,7 +83,7 @@ typedef struct s_map
 	uint32_t	size_y;
 	int32_t		min_z;
 	int32_t		max_z;
-	t_node		**node_arr;
+	t_node		*nodes;
 
 } t_map;
 
@@ -89,8 +98,8 @@ typedef struct s_line
 
 typedef struct s_display
 {
-	t_point		p0;
-	t_point		p1;
+	t_node		*p0;
+	t_node		*p1;
 	uint32_t	offset_x;
 	uint32_t	offset_y;
 	t_proj		projection;
@@ -98,6 +107,7 @@ typedef struct s_display
 	float		ry;
 	float		rz;
 	float		zoom_factor;
+	float		height_scale;
 	int8_t		dynamic_zoom;
 	int8_t		node;
 	int8_t		node_fill;
@@ -138,31 +148,38 @@ void free_display(t_display	**display);
 t_display	*init_display(t_map *map);
 void wipe_screen(t_display	*display, uint32_t colour);
 
+// Data Structure
+uint32_t get_index(int32_t x, int32_t y, t_map *map);
+
 // point generation
 void res_point(t_display *display, t_point *p);
-void gen_point(t_point *p, int32_t x, int32_t y, int32_t z, uint32_t colour);
+void gen_point(t_point *p, t_node *node);
 
 // rotation
 void rotate_point(t_point *p, float rx, float ry, float rz);
+void rotate_node(t_node *node, float rx, float ry, float rz);
 
 // draw pixel
 void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, uint32_t colour);
 
 // draw
-void    draw_line(t_point p0, t_point p1, mlx_image_t	*g_img);
-int32_t get_step(int32_t p0, int32_t p1);
-void	draw_update(t_display	*display);
-void	draw_circle(mlx_image_t *g_img, t_point p, int32_t r, uint8_t fill);
-void	draw_grid(t_display	*display);
+void    	draw_line(t_node p_start, t_node p_end, mlx_image_t	*g_img);
+int32_t 	get_step(int32_t p0, int32_t p1);
+void		draw_update(t_display	*display);
+void		draw_circle(mlx_image_t *g_img, t_node p, int32_t r, uint8_t fill);
+void		draw_grid(t_display	*display);
 
 // hooks
 void	test_hook(void* display);
 void	grid_hook(void* display);
 
 // colours
-uint32_t get_colour(t_point p0, t_point p1, float weight);
-float weight_scuffed(t_point start, t_point p0, t_line line);
-float get_weight(t_point p, t_point p0, t_point p1);
+uint32_t	get_colour(t_node p0, t_node p1, float weight);
+float		get_weight(t_node start, t_point current, t_node end);
+void		set_rgb(uint32_t c, t_node *node);
+uint32_t	blend_rgb_node(t_node *node);
+uint32_t	blend_rgb(uint8_t rr, uint8_t gg, uint8_t bb, uint8_t aa);
+float		weight_scuffed(t_point start, t_point p0, t_line line);
 
 // math
 float dtor(float degrees);
@@ -176,5 +193,6 @@ void user_input(t_display	*display);
 void p_display_val(t_display	*display);
 void p_map(t_map *map);
 void p_point(t_point *p);
+
 
 #endif

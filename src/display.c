@@ -66,11 +66,12 @@ void reset_display(t_display	*display)
 {
 	display->node = -1;
 	display->node_fill = 1;
-	display->node_rad = 10;
+	display->node_rad = NODE_RADIUS;
 	display->zoom_factor = dyn_zoom(display)/2;
 	display->offset_x = (WIDTH / 2) - 200;
 	display->offset_y = (HEIGHT / 2) - 200;
 	display->projection = TOPDOWN;
+	display->height_scale = HEIGHT_SCALE;
 	set_projection(display);
 }
 
