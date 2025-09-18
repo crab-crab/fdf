@@ -4,13 +4,13 @@ void set_point(t_display	*display, uint32_t x, uint32_t y, uint32_t p)
 {
 	if (p == 0)
 	{
-		display->p0.pix_x = (float)x;
-		display->p0.pix_y = (float)y;
+		display->p0->pix_x = (float)x;
+		display->p0->pix_y = (float)y;
 	}
 	else
 	{
-		display->p1.pix_x = (float)x;
-		display->p1.pix_y = (float)y;
+		display->p1->pix_x = (float)x;
+		display->p1->pix_y = (float)y;
 	}
 }
 

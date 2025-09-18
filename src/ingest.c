@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/18 18:30:20 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/18 20:38:04 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,10 +156,10 @@ int fill_map(t_map *map, char	**text)
 				map->min_z = map->nodes[index].z_orig;
 			map->nodes[index].colour = ft_hextoi(line[i_x]);
 			set_rgb(ft_hextoi(line[i_x]), &map->nodes[index]);
-			map->nodes[index].colour = blend_rgb(&map->nodes[index]);
+			map->nodes[index].colour = blend_rgb(map->nodes[index].rr, map->nodes[index].gg, map->nodes[index].bb, map->nodes[index].aa);
 
 			
-			free(line[i_x]);
+			//free(line[i_x]);
 			i_x++; //incorporate into while statement increment?
 		}
 		free(line);
@@ -190,6 +190,8 @@ int32_t parse_map(char *filename, t_map *map)
 		return (-1);
 	map->size_y = ft_size(text);
 	map->size_x = count_cells(*text, ' ');
+	map->min_z = INT32_MAX;
+	map->max_z = INT32_MIN;
 	map->nodes = ft_calloc(map->size_x * map->size_y, sizeof(t_node));
 	fill_map(map, text);
 	return (1);

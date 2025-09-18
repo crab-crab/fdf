@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/18 20:18:24 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/18 20:41:07 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define WIDTH 2000
 # define HEIGHT 2000
 # define BORDER 50
-# define ROT_STEP 0.03
+# define ROT_STEP 0.06
 # define TRAN_STEP 10
 # define ZOOM_STEP 1.2
 # define NODE_RADIUS 5
