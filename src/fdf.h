@@ -59,12 +59,6 @@ typedef struct s_node
 	uint8_t		bb;
 } t_node;
 
-typedef struct s_point
-{
-	int32_t		pix_x;
-	int32_t		pix_y;
-} t_point;
-
 typedef struct s_map
 {
 	int32_t		size_x;
@@ -73,15 +67,6 @@ typedef struct s_map
 	int32_t		max_z;
 	t_node		*nodes;
 } t_map;
-
-typedef struct s_line
-{
-	int32_t		dx;
-    int32_t		dy;
-    int32_t		stepx;
-    int32_t		stepy;
-    int32_t		err;
-} t_line;
 
 typedef struct s_display
 {
@@ -109,6 +94,23 @@ typedef struct s_display
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
 } t_display;
+
+typedef struct s_point
+{
+	int32_t		pix_x;
+	int32_t		pix_y;
+} t_point;
+
+typedef struct s_line
+{
+	int32_t		dx;
+    int32_t		dy;
+    int32_t		stepx;
+    int32_t		stepy;
+    int32_t		err;
+} t_line;
+
+
 
 
 

@@ -1,13 +1,5 @@
 #include "fdf.h"
 
-// void	set_projection(t_display	*display)
-// {
-// 	display->rx = display->projection.rx;
-// 	display->ry = display->projection.ry;
-// 	display->rz = display->projection.rz;
-
-// }
-
 void wipe_screen(t_display	*display, uint32_t colour)
 {
 	int x;
@@ -53,6 +45,7 @@ void free_display(t_display	**display_p)
 	*display_p = NULL;
 }
 
+/*get x.y hypoteneuse size and return zoom factor acording to window size*/
 int dyn_zoom(t_display	*display)
 {
 	int hypo;
@@ -75,7 +68,6 @@ void reset_display(t_display	*display)
 	display->ry = 0;
 	display->rz = 0;
 	display->proj = ISOMETRIC;
-	//set_projection(display);
 }
 
 

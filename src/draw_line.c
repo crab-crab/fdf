@@ -32,14 +32,14 @@ void init_line(t_line *line, t_node p0, t_node p1)
 	line->err = line->dx - line->dy;
 }
 
-void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, uint32_t colour)
+void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, uint32_t colour) // refactor to shorten to column limit
 {
 	if (pix_x >= 0 + BORDER && pix_x <= WIDTH - BORDER && pix_y >= 0 + BORDER && pix_y <= HEIGHT - BORDER)
 		mlx_put_pixel(g_img, (uint32_t)pix_x, (uint32_t)pix_y, colour);
 
 }
 
-void    draw_line(t_node p_start, t_node p_end, mlx_image_t	*g_img)
+void    draw_line(t_node p_start, t_node p_end, mlx_image_t	*g_img) // wrap p info into line?
 {
 	t_line line;
 	int32_t e2;
@@ -85,6 +85,6 @@ void	draw_update(t_display	*display)
 	}
 	// else
 	// {
-	// 	printf("! Line Out of Bounds !\n");
+	// 	printf("! Line Out of Bounds !\n"); //remove
 	// }
 }
