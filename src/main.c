@@ -12,6 +12,17 @@ void hook(void *param)
 	draw_grid(display);
 }
 
+void cleanup(t_display	*display)
+{
+	free(display->map->nodes);
+	free(display->map);
+
+	mlx_terminate(display->mlx);
+
+
+	free(display);
+}
+
 /*
 Add
 	-Keyhooks
@@ -38,5 +49,5 @@ int main(int argc, char **argv)
 	mlx_image_to_window(display->mlx, display->g_img, 0, 0);
 	mlx_loop_hook(display->mlx, &hook, display);
 	mlx_loop(display->mlx);
-	mlx_terminate(display->mlx);
+	cleanup(display);
 }

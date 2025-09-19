@@ -12,12 +12,42 @@
 
 #include "fdf.h"
 
+// the one we all know and love, 120 deg between all 3 axis
 void isometric_n(t_node *node, int32_t *x_pix, int32_t *y_pix)
 {
 	node->pix_x = ((node->x - node->y) * cos(0.523599));
 	node->pix_y = ((node->x + node->y) * sin(0.523599) - node->z);
 }
 
+// topdown
+void ortho_top(t_node *node)
+{
+    node->pix_x = node->x;
+    node->pix_y = node->y;
+}
+
+// d = distance from camera to projection plane
+void perspective_n(t_node *node, float d)
+{
+    float factor;
+	
+	if (node->z != -d)
+		factor = d / (d + node->z);
+	else
+		factor = FLT_MAX;
+    node->pix_x = node->x * factor;
+    node->pix_y = node->y * factor;
+}
+
+// 45°
+void cabinet_n(t_node *node)
+{
+    const float scale;
+	
+	scale = 0.5;
+    node->pix_x = node->x + node->z * scale * cosf(0.785398f);
+    node->pix_y = node->y + node->z * scale * sinf(0.785398f);
+}
 void reset_node(t_node *node)
 {
 	node->x = node->x_orig;

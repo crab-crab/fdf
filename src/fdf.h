@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <memory.h>
 #include <math.h>
+#include <float.h>
 #include <fcntl.h>
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
@@ -100,8 +101,8 @@ typedef struct s_display
 {
 	t_node		*p0;
 	t_node		*p1;
-	uint32_t	offset_x;
-	uint32_t	offset_y;
+	int32_t		offset_x;
+	int32_t		offset_y;
 	t_proj		projection;
 	float		rx;
 	float		ry;

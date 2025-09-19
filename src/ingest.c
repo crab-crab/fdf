@@ -76,15 +76,16 @@ int	fill_buffer(char **buffer, int fd)
 			if (*buffer)
 				free(*buffer);
 			free(temp);
-			return (*buffer = NULL, -1);
+			return (*buffer = NULL, -1); // this function does not own buffer, should it be freeing?
 		}
 		if (bytes_read == 0)
 			break ;
 		swap = ft_strjoin(*buffer, temp);
+		if (!swap)
+			return (free(temp), -1);
 		*buffer = swap;
 	}
-	free(temp);
-	return (1);
+	return (free(temp), 1);
 }
 
 int32_t 	ft_size(char **arr)
@@ -159,7 +160,7 @@ int fill_map(t_map *map, char	**text)
 			map->nodes[index].colour = blend_rgb(map->nodes[index].rr, map->nodes[index].gg, map->nodes[index].bb, map->nodes[index].aa);
 
 			
-			//free(line[i_x]);
+			//free(line[i_x]); // check usage
 			i_x++; //incorporate into while statement increment?
 		}
 		free(line);
@@ -183,16 +184,16 @@ int32_t parse_map(char *filename, t_map *map)
 	if (fd < 0)
 		return (free(path), write(1, "file open error\n", 16));
 	if (fill_buffer(&buffer, fd) < 0)
-		return (-1);
+		return (free(path), -1);
 	text = ft_split(buffer, '\n');
 	free(buffer);
 	if (!*text)
-		return (-1);
+		return (free(path), -1);
 	map->size_y = ft_size(text);
 	map->size_x = count_cells(*text, ' ');
 	map->min_z = INT32_MAX;
 	map->max_z = INT32_MIN;
-	map->nodes = ft_calloc(map->size_x * map->size_y, sizeof(t_node));
+	map->nodes = (t_node*)ft_calloc(map->size_x * map->size_y, sizeof(t_node));
 	fill_map(map, text);
 	return (1);
 }
