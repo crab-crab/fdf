@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:58:07 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/19 15:18:06 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/19 18:58:22 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,16 @@ void isometric_n(t_node *node)
 }
 
 // topdown
-void ortho_top(t_node *node)
+void topdown(t_node *node)
 {
     node->pix_x = node->x;
     node->pix_y = node->y;
 }
 
-// d = distance from camera to projection plane
-void perspective_n(t_node *node, float d)
+void dimetric_n(t_node *node)
 {
-    float factor;
-	
-	if (node->z != -d)
-		factor = d / (d + node->z);
-	else
-		factor = FLT_MAX;
-    node->pix_x = node->x * factor;
-    node->pix_y = node->y * factor;
+	node->pix_x = node->x * cosf(0.785398f) + node->y * cosf(0.61548f);
+    node->pix_y = node->x * sinf(0.785398f) - node->y * sinf(0.61548f) - node->z;
 }
 
 // 45°
@@ -48,6 +41,7 @@ void cabinet_n(t_node *node)
     node->pix_x = node->x + node->z * scale * cosf(0.785398f);
     node->pix_y = node->y + node->z * scale * sinf(0.785398f);
 }
+
 void reset_node(t_display *display, t_node *node)
 {
 	node->x = node->x_orig;
@@ -62,7 +56,15 @@ void resolve_node(t_display *display, t_node *node)
 	node->y = node->y_orig;
 	node->z = node->z_orig * display->height_scale;
 	rotate_node(node, display);
-	isometric_n(node);
+	if (display->proj == ISOMETRIC)	
+		isometric_n(node);
+	else if (display->proj == TOPDOWN)
+		topdown(node);
+	else if (display->proj == DIMETRIC)
+		dimetric_n(node);
+	else if(display->proj == CABINET)
+		cabinet_n(node);
+
 
 	node->pix_x = ((display->offset_x) + (node->pix_x * display->zoom_factor));
 	node->pix_y = ((display->offset_y) + (node->pix_y * display->zoom_factor));

@@ -1,12 +1,12 @@
 #include "fdf.h"
 
-void	set_projection(t_display	*display)
-{
-	display->rx = display->projection.rx;
-	display->ry = display->projection.ry;
-	display->rz = display->projection.rz;
+// void	set_projection(t_display	*display)
+// {
+// 	display->rx = display->projection.rx;
+// 	display->ry = display->projection.ry;
+// 	display->rz = display->projection.rz;
 
-}
+// }
 
 void wipe_screen(t_display	*display, uint32_t colour)
 {
@@ -70,9 +70,12 @@ void reset_display(t_display	*display)
 	display->zoom_factor = dyn_zoom(display)/2;
 	display->offset_x = (WIDTH / 2) - 200;
 	display->offset_y = (HEIGHT / 2) - 200;
-	display->projection = TOPDOWN;
 	display->height_scale = HEIGHT_SCALE;
-	set_projection(display);
+	display->rx = 0;
+	display->ry = 0;
+	display->rz = 0;
+	display->proj = ISOMETRIC;
+	//set_projection(display);
 }
 
 
@@ -92,7 +95,7 @@ t_display	*init_display(t_map *map)
 	display->map = map;
 	reset_display(display); //test
 
-	set_projection(display);
+	//set_projection(display);
 
 	return (display);
 }

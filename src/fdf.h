@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/19 15:25:32 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/19 18:57:05 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,17 @@
 # define BORDER 50
 # define ROT_STEP 0.06
 # define TRAN_STEP 10
-# define ZOOM_STEP 1.2
+# define ZOOM_STEP 1.05
 # define NODE_RADIUS 5
 # define HEIGHT_SCALE 1
+# define ISOMETRIC 1
+# define TOPDOWN 2
+# define DIMETRIC 3
+# define CABINET 4
 # define PATH_MAP "test_maps/"
 
 # define BLACK 0x000000FF;
 # define WHITE 0xFFFFFFFF;
-
-typedef struct s_proj
-{
-	float		rx;
-	float		ry;
-	float		rz;
-} t_proj;
-
-# define ISO_PROJ		(t_proj){0.61548, -0.785398, 0}
-# define TOPDOWN		(t_proj){0, 0, 0}
-# define SIDE1			(t_proj){0, 1.5708, 0}
-# define SIDE2			(t_proj){1.5708, 0, 0}
-# define DIMETRIC		(t_proj){-0.523599, 0.785398, 0}
-# define PERSPECT 		(t_proj){-0.523599, 0.523599, 0}
-# define CABINET		(t_proj){0, 0.785398, 0}
-
-//const t_proj	PROJECTIONS[7] = {ISO_PROJ, TOPDOWN, SIDE1, SIDE2, DIMETRIC, PERSPECT, CABINET};
 
 typedef struct s_node
 {
@@ -85,7 +72,6 @@ typedef struct s_map
 	int32_t		min_z;
 	int32_t		max_z;
 	t_node		*nodes;
-
 } t_map;
 
 typedef struct s_line
@@ -103,7 +89,7 @@ typedef struct s_display
 	t_node		*p1;
 	int32_t		offset_x;
 	int32_t		offset_y;
-	t_proj		projection;
+	int16_t		proj;
 	float		rx;
 	float		ry;
 	float		rz;

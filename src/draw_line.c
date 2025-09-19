@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:00:46 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/19 16:49:14 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/19 17:35:54 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void    draw_line(t_node p_start, t_node p_end, mlx_image_t	*g_img)
 
 int valid_point(t_node p0)
 {
-	return (1); //debug
+	//return (1); //debug
 	if (p0.pix_x >= 0 && p0.pix_x <= WIDTH && p0.pix_y >= 0 && p0.pix_y <= HEIGHT)
 		return (1);
 	else
@@ -83,8 +83,8 @@ void	draw_update(t_display	*display)
 	{
 		draw_line(*display->p0, *display->p1, display->g_img);
 	}
-	else
-	{
-		printf("! Line Out of Bounds !\n");
-	}
+	// else
+	// {
+	// 	printf("! Line Out of Bounds !\n");
+	// }
 }

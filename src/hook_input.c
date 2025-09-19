@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:12:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/19 15:14:25 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/19 18:44:57 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ void rot_input(t_display	*display)
 		display->rz -= ROT_STEP;
 	if(mlx_is_key_down(display->mlx, MLX_KEY_SPACE))
 		reset_display(display);
+	if(mlx_is_key_down(display->mlx, MLX_KEY_1))
+		display->proj = ISOMETRIC;
+	if(mlx_is_key_down(display->mlx, MLX_KEY_2))
+		display->proj = TOPDOWN;
+	if(mlx_is_key_down(display->mlx, MLX_KEY_3))
+		display->proj = DIMETRIC;
+	if(mlx_is_key_down(display->mlx, MLX_KEY_4))
+		display->proj = CABINET;
 }
 
 void nodes_input(t_display	*display)
@@ -62,6 +70,10 @@ void trans_input(t_display	*display)
 		display->zoom_factor *= ZOOM_STEP;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_X))
 		display->zoom_factor /= ZOOM_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_R))
+		display->height_scale *= ZOOM_STEP;
+	if (mlx_is_key_down(display->mlx, MLX_KEY_F))
+		display->height_scale /= ZOOM_STEP;
 }
 
 void user_input(t_display	*display)
