@@ -79,7 +79,7 @@ void	draw_update(t_display	*display)
 {
 	t_point p;
 
-	if (valid_point(*display->p0) && valid_point(*display->p1))
+	if (valid_point(*display->p0) || valid_point(*display->p1))
 	{
 		draw_line(*display->p0, *display->p1, display->g_img);
 	}
