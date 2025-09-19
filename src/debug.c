@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:18:04 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/18 20:39:04 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/19 15:39:38 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void p_display_val(t_display	*display)
 {
 	printf("Display Values: \n");
-	printf("p0 | x:%d y:%d\n", display->p0->pix_x, display->p0->pix_y);
-	printf("p1 | x:%d y:%d\n", display->p1->pix_x, display->p1->pix_y);
+	printf("p0 | x:%f y:%f\n", display->p0->pix_x, display->p0->pix_y);
+	printf("p1 | x:%f y:%f\n", display->p1->pix_x, display->p1->pix_y);
 }
 
 // void p_point(t_point *p)
@@ -26,8 +26,8 @@ void p_display_val(t_display	*display)
 
 void p_map(t_map *map)
 {
-	uint32_t i = 0;
-	uint32_t j;
+	int32_t i = 0;
+	int32_t j;
 	uint32_t index;
 	
 	if (!map)
@@ -43,7 +43,7 @@ void p_map(t_map *map)
 		while (j < map->size_x)
 		{
 			index = i * map->size_x + j;
-			printf("%d,%d ", map->nodes[index].z_orig, map->nodes[index].colour);
+			printf("|%d,%d,%d,%d| \t ", map->nodes[index].x_orig, map->nodes[index].y_orig, map->nodes[index].z_orig, map->nodes[index].colour);
 			j++;
 		}
 		printf("\n");

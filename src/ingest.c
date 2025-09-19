@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/18 20:38:04 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/19 15:24:38 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ uint32_t get_index(int32_t x, int32_t y, t_map *map)
 
 int fill_map(t_map *map, char	**text)
 {
-	uint32_t	i_y;
-	uint32_t	i_x;
+	int32_t	i_y;
+	int32_t	i_x;
 	uint32_t	index;
 	char **line;
 

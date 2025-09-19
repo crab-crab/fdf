@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/18 20:41:07 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/19 15:25:32 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ typedef struct s_node
 	float		x;
 	float		y;
 	float		z;
-	int32_t		pix_x;
-	int32_t		pix_y;
+	float		pix_x;
+	float		pix_y;
 	uint32_t 	colour;
 	uint8_t		aa;
 	uint8_t		rr;
@@ -80,8 +80,8 @@ typedef struct s_point
 
 typedef struct s_map
 {
-	uint32_t	size_x;
-	uint32_t	size_y;
+	int32_t		size_x;
+	int32_t		size_y;
 	int32_t		min_z;
 	int32_t		max_z;
 	t_node		*nodes;
@@ -167,7 +167,7 @@ void rotate_point(t_point *p, float rx, float ry, float rz);
 void rotate_node(t_node *node, t_display *display);
 
 // projection
-void isometric_n(t_node *node, int32_t *x_pix, int32_t *y_pix);
+void isometric_n(t_node *node);
 void resolve_node(t_display *display, t_node *node);
 
 // draw pixel

@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:12:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/16 16:15:04 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/19 15:14:25 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void rot_input(t_display	*display)
 {
 	if (mlx_is_key_down(display->mlx, MLX_KEY_W))
 		display->rx += ROT_STEP;
-	if else(mlx_is_key_down(display->mlx, MLX_KEY_S))
+	if(mlx_is_key_down(display->mlx, MLX_KEY_S))
 		display->rx -= ROT_STEP;
-	if else(mlx_is_key_down(display->mlx, MLX_KEY_A))
+	if(mlx_is_key_down(display->mlx, MLX_KEY_A))
 		display->ry += ROT_STEP;
-	if else(mlx_is_key_down(display->mlx, MLX_KEY_D))
+	if(mlx_is_key_down(display->mlx, MLX_KEY_D))
 		display->ry -= ROT_STEP;
-	if else(mlx_is_key_down(display->mlx, MLX_KEY_Q))
+	if(mlx_is_key_down(display->mlx, MLX_KEY_Q))
 		display->rz += ROT_STEP;
-	if else(mlx_is_key_down(display->mlx, MLX_KEY_E))
+	if(mlx_is_key_down(display->mlx, MLX_KEY_E))
 		display->rz -= ROT_STEP;
-	if else(mlx_is_key_down(display->mlx, MLX_KEY_SPACE))
+	if(mlx_is_key_down(display->mlx, MLX_KEY_SPACE))
 		reset_display(display);
 }
 
