@@ -39,9 +39,6 @@
 # define CABINET 4
 # define PATH_MAP "test_maps/"
 
-# define BLACK 0x000000FF;
-# define WHITE 0xFFFFFFFF;
-
 typedef struct s_node
 {
 	int32_t		x_orig;
@@ -95,13 +92,13 @@ typedef struct s_display
 	mlx_image_t	*g_img;
 } t_display;
 
-typedef struct s_point
+typedef struct s_point // fold into line
 {
 	int32_t		pix_x;
 	int32_t		pix_y;
 } t_point;
 
-typedef struct s_line
+typedef struct s_line // add start end?
 {
 	int32_t		dx;
     int32_t		dy;
@@ -110,26 +107,13 @@ typedef struct s_line
     int32_t		err;
 } t_line;
 
-
-
-
-
-typedef struct s_colour
+typedef struct s_colour //redundant
 {
 	uint8_t	rr;
 	uint8_t	gg;
 	uint8_t	bb;
 	uint8_t	aa;
 } t_colour;
-
-// // projections
-// extern const	t_proj ISO_PROJ;
-// extern const	t_proj TOPDOWN;
-// extern const	t_proj SIDE1;
-// extern const	t_proj SIDE2;
-// extern const	t_proj DIMETRIC;
-// extern const	t_proj PERSPECT;
-// extern const	t_proj CABINET;
 
 // map parsing
 int32_t parse_map(char *filename, t_map *map);

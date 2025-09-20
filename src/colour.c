@@ -1,7 +1,7 @@
 #include "fdf.h"
 
 /*extract respective 8-bit values for RGB into t_colour struct*/
-void get_rgb(uint32_t c, t_colour *colour)
+void get_rgb(uint32_t c, t_colour *colour) // redundant
 {
 	colour->rr = (c >> 16) & 0xFF;
 	colour->gg = (c >> 8) & 0xFF;
@@ -46,7 +46,7 @@ uint32_t	blend_rgb(uint8_t rr, uint8_t gg, uint8_t bb, uint8_t aa)
 }
 
 
-uint8_t clampf_u8(float value)
+uint8_t clampf_u8(float value) // move to math
 {
 	if (value < 0)
 		return (0);
@@ -82,7 +82,7 @@ uint32_t get_colour(t_node p0, t_node p1, float weight)
 }
 
 /*using floats*/
-float get_weight(t_node start, t_point current, t_node end)
+float get_weight(t_node start, t_point current, t_node end) //less expensive method? -> pass line object?
 {
 	float d0;
 	float d1;
@@ -93,4 +93,27 @@ float get_weight(t_node start, t_point current, t_node end)
 
 	weight = (d0 / (d0 + d1));
 	return (weight);
+}
+/*
+length_2	- length of line squared
+wx/wy		- current displacement
+weight		- dot product / len squared -> unwraps everything -> no sqrt
+*/
+float get_weight_2(t_line line)
+{
+    float length_2;
+	float wx;
+	float wy;
+	float weight;
+	
+	length_2 = line.dx * line.dx + line.dy * line.dy;
+
+    wx = line.pix_x - line.start_x;
+    wy = line.pix_y - line.start_y;
+
+
+    weight = (wx*line.dx + wy*line.dy) / length_2;
+    if (weight < 0) weight = 0;
+    if (weight > 1) weight = 1;
+    return (weight);
 }

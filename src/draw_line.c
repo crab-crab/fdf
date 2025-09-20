@@ -23,7 +23,7 @@ int32_t get_step(int32_t p0, int32_t p1)
 	return (step);
 }
 
-void init_line(t_line *line, t_node p0, t_node p1)
+void init_line(t_line *line, t_node p0, t_node p1) // include p0 x/y & p1 x/y then only pass these along
 {
 	line->dx = ft_abs((int32_t)p1.pix_x - (int32_t)p0.pix_x);
 	line->dy = ft_abs((int32_t)p1.pix_y - (int32_t)p0.pix_y);
