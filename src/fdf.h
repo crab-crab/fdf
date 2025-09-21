@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/19 18:57:05 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/21 16:11:22 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
 
-# define BUFFER_SIZE 2048
+# define BUFFER_SIZE 20480
 # define PI	3.1416
 # define WIDTH 2000
 # define HEIGHT 2000
@@ -100,6 +100,11 @@ typedef struct s_point // fold into line
 
 typedef struct s_line // add start end?
 {
+	
+	int32_t		start_x;
+	int32_t		start_y;
+	int32_t		pix_x;
+	int32_t		pix_y;
 	int32_t		dx;
     int32_t		dy;
     int32_t		stepx;
@@ -163,6 +168,7 @@ void		set_rgb(uint32_t c, t_node *node);
 uint32_t	blend_rgb_node(t_node *node);
 uint32_t	blend_rgb(uint8_t rr, uint8_t gg, uint8_t bb, uint8_t aa);
 float		weight_scuffed(t_point start, t_point p0, t_line line);
+float get_weight_2(t_line line);
 
 // math
 float dtor(float degrees);
