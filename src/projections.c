@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:58:07 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/19 18:58:22 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/21 17:05:40 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,6 @@ void cabinet_n(t_node *node)
 	scale = 0.5;
     node->pix_x = node->x + node->z * scale * cosf(0.785398);
     node->pix_y = node->y + node->z * scale * sinf(0.785398);
-}
-
-void reset_node(t_display *display, t_node *node)
-{
-	node->x = node->x_orig;
-	node->y = node->y_orig;
-	node->z = node->z_orig * display->height_scale;
 }
 
 void resolve_node(t_display *display, t_node *node) // add casting for funky render option?

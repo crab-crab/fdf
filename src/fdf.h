@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/21 16:11:22 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/21 17:41:48 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,14 @@ typedef struct s_display
 	float		height_scale;
 	int8_t		dynamic_zoom;
 	int8_t		node;
-	int8_t		node_fill;
+	int8_t		node_f;
 	uint32_t	node_rad;
 	t_map		*map;
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
 } t_display;
 
-typedef struct s_point // fold into line
-{
-	int32_t		pix_x;
-	int32_t		pix_y;
-} t_point;
-
-typedef struct s_line // add start end?
+typedef struct s_line
 {
 	
 	int32_t		start_x;
@@ -111,14 +105,6 @@ typedef struct s_line // add start end?
     int32_t		stepy;
     int32_t		err;
 } t_line;
-
-typedef struct s_colour //redundant
-{
-	uint8_t	rr;
-	uint8_t	gg;
-	uint8_t	bb;
-	uint8_t	aa;
-} t_colour;
 
 // map parsing
 int32_t parse_map(char *filename, t_map *map);
@@ -135,42 +121,30 @@ void wipe_screen(t_display	*display, uint32_t colour);
 // Data Structure
 uint32_t get_index(int32_t x, int32_t y, t_map *map);
 
-// point generation
-void res_point(t_display *display, t_point *p);
-void gen_point(t_point *p, t_node *node);
-
 // rotation
-void rotate_point(t_point *p, float rx, float ry, float rz);
 void rotate_node(t_node *node, t_display *display);
 
 // projection
-void isometric_n(t_node *node);
 void resolve_node(t_display *display, t_node *node);
 
 // draw pixel
 void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, uint32_t colour);
+int valid_point(t_node p0);
 
 // draw
 void    	draw_line(t_node p_start, t_node p_end, mlx_image_t	*g_img);
-int32_t 	get_step(int32_t p0, int32_t p1);
-void		draw_update(t_display	*display);
 void		draw_circle(mlx_image_t *g_img, t_node p, int32_t r, uint8_t fill);
 void		draw_grid(t_display	*display);
 
-// hooks
-void	test_hook(void* display);
-void	grid_hook(void* display);
-
 // colours
 uint32_t	get_colour(t_node p0, t_node p1, float weight);
-float		get_weight(t_node start, t_point current, t_node end);
 void		set_rgb(uint32_t c, t_node *node);
-uint32_t	blend_rgb_node(t_node *node);
 uint32_t	blend_rgb(uint8_t rr, uint8_t gg, uint8_t bb, uint8_t aa);
-float		weight_scuffed(t_point start, t_point p0, t_line line);
-float get_weight_2(t_line line);
+float 		get_weight_2(t_line line);
 
 // math
+uint8_t clampf_u8(float value);
+int32_t ft_abs(int32_t num);
 float dtor(float degrees);
 float rtod(float radians);
 
@@ -181,7 +155,6 @@ void user_input(t_display	*display);
 // debugging
 void p_display_val(t_display	*display);
 void p_map(t_map *map);
-void p_point(t_point *p);
 
 
 #endif

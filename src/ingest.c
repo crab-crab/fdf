@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/19 15:24:38 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/21 16:47:41 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	fill_buffer(char **buffer, int fd)
 		return (-1);
 	while (!ft_strlchr(*buffer, '\0', __SIZE_MAX__))
 	{
-		ft_memset(temp, 0, BUFFER_SIZE + 1); // redundant due to calloc?
+		ft_memset(temp, 0, BUFFER_SIZE + 1);
 		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read < 0) // make a free function?
 		{
@@ -159,8 +159,7 @@ int fill_map(t_map *map, char	**text)
 			set_rgb(ft_hextoi(line[i_x]), &map->nodes[index]);
 			map->nodes[index].colour = blend_rgb(map->nodes[index].rr, map->nodes[index].gg, map->nodes[index].bb, map->nodes[index].aa);
 
-			
-			//free(line[i_x]); // check usage
+			free(line[i_x]); // check usage
 			i_x++; //incorporate into while statement increment?
 		}
 		free(line);

@@ -6,42 +6,42 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:12:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/19 18:44:57 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/21 17:48:17 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void rot_input(t_display	*display)
+void	rot_input(t_display	*display)
 {
 	if (mlx_is_key_down(display->mlx, MLX_KEY_W))
 		display->rx += ROT_STEP;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_S))
 		display->rx -= ROT_STEP;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_A))
 		display->ry += ROT_STEP;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_D))
 		display->ry -= ROT_STEP;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_Q))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_Q))
 		display->rz += ROT_STEP;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_E))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_E))
 		display->rz -= ROT_STEP;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_SPACE))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_SPACE))
 		reset_display(display);
-	if(mlx_is_key_down(display->mlx, MLX_KEY_1))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_1))
 		display->proj = ISOMETRIC;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_2))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_2))
 		display->proj = TOPDOWN;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_3))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_3))
 		display->proj = DIMETRIC;
-	if(mlx_is_key_down(display->mlx, MLX_KEY_4))
+	if (mlx_is_key_down(display->mlx, MLX_KEY_4))
 		display->proj = CABINET;
 }
 
-void nodes_input(t_display	*display)
+void	nodes_input(t_display	*display)
 {
 	if (mlx_is_key_down(display->mlx, MLX_KEY_SEMICOLON))
-		display->node_fill *= -1;
+		display->node_f *= -1;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_P))
 		display->node *= -1;
 	if (mlx_is_key_down(display->mlx, MLX_KEY_O))
@@ -56,7 +56,7 @@ void nodes_input(t_display	*display)
 	}
 }
 
-void trans_input(t_display	*display)
+void	trans_input(t_display	*display)
 {
 	if (mlx_is_key_down(display->mlx, MLX_KEY_RIGHT))
 		display->offset_x += TRAN_STEP;
@@ -76,11 +76,10 @@ void trans_input(t_display	*display)
 		display->height_scale /= ZOOM_STEP;
 }
 
-void user_input(t_display	*display)
+void	user_input(t_display	*display)
 {
 	if (mlx_is_key_down(display->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(display->mlx);
-
 	rot_input(display);
 	nodes_input(display);
 	trans_input(display);

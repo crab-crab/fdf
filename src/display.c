@@ -1,5 +1,8 @@
 #include "fdf.h"
 
+/*
+set every pixel on screen to arg colour
+*/
 void wipe_screen(t_display	*display, uint32_t colour)
 {
 	int x;
@@ -58,7 +61,7 @@ int dyn_zoom(t_display	*display)
 void reset_display(t_display	*display)
 {
 	display->node = -1;
-	display->node_fill = 1;
+	display->node_f = 1;
 	display->node_rad = NODE_RADIUS;
 	display->zoom_factor = dyn_zoom(display)/2;
 	display->offset_x = (WIDTH / 2) - 200;
@@ -85,9 +88,7 @@ t_display	*init_display(t_map *map)
 	if (!display->g_img)
 		return (free_display(&display), NULL);
 	display->map = map;
-	reset_display(display); //test
-
-	//set_projection(display);
+	reset_display(display);
 
 	return (display);
 }

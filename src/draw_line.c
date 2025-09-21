@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:00:46 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/21 16:20:34 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/21 17:16:26 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int32_t get_step(int32_t p0, int32_t p1)
 	return (step);
 }
 
-void init_line(t_line *line, t_node p0, t_node p1) // include p0 x/y & p1 x/y then only pass these along
+void init_line(t_line *line, t_node p0, t_node p1)
 {
 	line->dx = ft_abs((int32_t)p1.pix_x - (int32_t)p0.pix_x);
 	line->dy = ft_abs((int32_t)p1.pix_y - (int32_t)p0.pix_y);
@@ -43,7 +43,7 @@ void draw_pixel(mlx_image_t	*g_img, int32_t pix_x, int32_t pix_y, uint32_t colou
 
 }
 
-void    draw_line(t_node p_start, t_node p_end, mlx_image_t	*g_img) // wrap p info into line?
+void    draw_line(t_node p_start, t_node p_end, mlx_image_t	*g_img)
 {
 	t_line line;
 	int32_t e2;
@@ -64,27 +64,14 @@ void    draw_line(t_node p_start, t_node p_end, mlx_image_t	*g_img) // wrap p in
 			line.pix_y += line.stepy;
 		}
 	}
-	draw_pixel(g_img, line.pix_x, line.pix_y, get_colour(p_start, p_end, get_weight_2(line)));
 }
 
 
 int valid_point(t_node p0)
 {
-	//return (1); //debug
 	if (p0.pix_x >= 0 && p0.pix_x <= WIDTH && p0.pix_y >= 0 && p0.pix_y <= HEIGHT)
 		return (1);
 	else
 		return (0);
 }
 
-void	draw_update(t_display	*display)
-{
-	if (valid_point(*display->p0) || valid_point(*display->p1))
-	{
-		draw_line(*display->p0, *display->p1, display->g_img);
-	}
-	// else
-	// {
-	// 	printf("! Line Out of Bounds !\n"); //remove
-	// }
-}
