@@ -23,11 +23,10 @@ SRCS =	$(SRCDIR)/main.c \
 		$(SRCDIR)/draw_circle.c \
 		$(SRCDIR)/rotation.c \
 		$(SRCDIR)/projections.c \
-		$(SRCDIR)/hook_test.c \
 		$(SRCDIR)/hook_input.c \
 		$(SRCDIR)/ingest.c \
-		$(SRCDIR)/constants.c \
 		$(SRCDIR)/math.c \
+		$(SRCDIR)/utils.c \
 		$(SRCDIR)/debug.c
 		
 		

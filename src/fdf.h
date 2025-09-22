@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/21 17:41:48 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/22 15:26:24 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_map
 	int32_t		min_z;
 	int32_t		max_z;
 	t_node		*nodes;
+	char		filename[50];
 } t_map;
 
 typedef struct s_display
@@ -90,6 +91,7 @@ typedef struct s_display
 	t_map		*map;
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
+	mlx_image_t	*text_img;
 } t_display;
 
 typedef struct s_line
@@ -151,6 +153,15 @@ float rtod(float radians);
 // user input
 void user_input(t_display	*display);
 
+// interface
+void draw_info(t_display *display);
+
+
+// utils
+char		*ft_strlchr(char *s, int c, size_t l);
+uint32_t	ft_hextoi(const char *nptr);
+int32_t 	ft_size(char **arr);
+int32_t		count_cells(char *txt, char c);
 
 // debugging
 void p_display_val(t_display	*display);
