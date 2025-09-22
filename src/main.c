@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	ft_strlcpy(map.filename, argv[1], ft_strlen(argv[1]));
 	display = init_display(&map);
 	if (!display)
-		exit(EXIT_FAILURE); //check use of exit -> change to return?
+		return (EXIT_FAILURE); //check use of exit -> change to return?
 
 	mlx_image_to_window(display->mlx, display->g_img, 0, 0);
 	mlx_loop_hook(display->mlx, &hook, display);

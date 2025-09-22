@@ -13,6 +13,7 @@
 #include "fdf.h"
 
 // the one we all know and love, 120 deg between all 3 axis
+// 0.523599 radians = 30 deg
 void isometric_n(t_node *node)
 {
 	node->pix_x = ((node->x - node->y) * cos(0.523599));
@@ -26,14 +27,15 @@ void topdown(t_node *node)
     node->pix_y = node->y;
 }
 
-// another paralell projection
+// like isometric but instead of treating all axes equally,
+// two axes share same angle while third is different
 void dimetric_n(t_node *node)
 {
 	node->pix_x = node->x * cosf(0.785398) + node->y * cosf(0.61548);
     node->pix_y = node->x * sinf(0.785398) - node->y * sinf(0.61548) - node->z;
 }
 
-// 45°
+// x–y plane unchanged, z slanted backward 45°
 void cabinet_n(t_node *node)
 {
     float scale;

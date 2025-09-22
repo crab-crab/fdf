@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-/*extract respective 8-bit values for RGB into t_colour struct*/
+/*Extract respective 8-bit values for RGB into t_colour struct*/
 void	set_rgb(uint32_t c, t_node *node)
 {
 	node->rr = (c >> 16) & 0xFF;
@@ -20,6 +20,7 @@ void	set_rgb(uint32_t c, t_node *node)
 	node->bb = c & 0xFF;
 }
 
+/*Blend components and return 0xRRGGBBAA*/
 uint32_t	blend_rgb(uint8_t rr, uint8_t gg, uint8_t bb, uint8_t aa)
 {
 	uint32_t	result;
@@ -46,12 +47,11 @@ uint32_t	get_colour(t_node p0, t_node p1, float weight)
 	rr = clampf_u8((weight * p1.rr) + ((1 - weight) * p0.rr));
 	gg = clampf_u8((weight * p1.gg) + ((1 - weight) * p0.gg));
 	bb = clampf_u8((weight * p1.bb) + ((1 - weight) * p0.bb));
-
 	return (blend_rgb(rr, gg, bb, 255));
 }
 
 /*
-Returns a weight between 0-1 indicating how far along line current pix x/y are
+Return a weight between 0-1 indicating how far along line current pix x/y are
 length_2	- length of line squared
 wx/wy		- current displacement
 weight		- dot product / len squared -> unwraps everything -> no sqrt
@@ -64,11 +64,8 @@ float	get_weight_2(t_line line)
 	float weight;
 	
 	length_2 = line.dx * line.dx + line.dy * line.dy;
-
     wx = line.pix_x - line.start_x;
     wy = line.pix_y - line.start_y;
-
-
     weight = (wx*line.dx + wy*line.dy) / length_2;
     if (weight < 0) weight = 0;
     if (weight > 1) weight = 1;
