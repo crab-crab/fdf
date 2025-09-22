@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/22 15:25:00 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/22 18:28:23 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,44 +42,42 @@ int	fill_buffer(char **buffer, int fd)
 	return (free(temp), 1);
 }
 
-
-uint32_t get_index(int32_t x, int32_t y, t_map *map)
+void fill_node(t_map *map, t_node *node, int32_t x, int32_t y)
 {
-	return (y * map->size_x + x);
+	node->x_orig = x;
+	node->y_orig = y;
+	node->aa = 255;
+	if (node->z_orig > map->max_z)
+		map->max_z = node->z_orig;
+	if (node->z_orig < map->min_z)
+		map->min_z = node->z_orig;
 }
 
 int fill_map(t_map *map, char	**text)
 {
-	int32_t	i_y;
-	int32_t	i_x;
-	uint32_t	index;
-	char **line;
+	int32_t		i_y;
+	int32_t		i_x;
+	t_node		*node;
+	char		**line;
 
-	i_y = 0;
-	while (i_y < map->size_y)
+	i_y = -1;
+	while (++i_y < map->size_y)
 	{
-		i_x = 0;
+		i_x = -1;
 		line = ft_split(text[i_y], ' '); // check for split malloc fail return -> confirm it even will return a NULL properly
-		while (i_x < map->size_x)
+		while (++i_x < map->size_x)
 		{
-			index = i_y * map->size_x + i_x;
-			map->nodes[index].x_orig = i_x;
-			map->nodes[index].y_orig = i_y;
-			map->nodes[index].z_orig = ft_atoi(line[i_x]);
-			map->nodes[index].aa = 255;
-			if (map->nodes[index].z_orig > map->max_z)
-				map->max_z = map->nodes[index].z_orig;
-			if (map->nodes[index].z_orig < map->min_z)
-				map->min_z = map->nodes[index].z_orig;
-			map->nodes[index].colour = ft_hextoi(line[i_x]);
-			set_rgb(ft_hextoi(line[i_x]), &map->nodes[index]);
-			map->nodes[index].colour = blend_rgb(map->nodes[index].rr, map->nodes[index].gg, map->nodes[index].bb, map->nodes[index].aa);
-
+			node = &map->nodes[i_y * map->size_x + i_x];
+			fill_node(map, node, i_x, i_y);
+			node->z_orig = ft_atoi(line[i_x]);
+			node->colour = ft_hextoi(line[i_x]);
+			set_rgb(ft_hextoi(line[i_x]), node);
+			node->colour = blend_rgb(node->rr, node->gg, node->bb, node->aa);
 			free(line[i_x]); // check usage
-			i_x++; //incorporate into while statement increment?
+			// i_x++; //incorporate into while statement increment?
 		}
 		free(line);
-		i_y++;
+		// i_y++;
 	}
 	return (1);
 }
@@ -87,25 +85,21 @@ int fill_map(t_map *map, char	**text)
 int32_t parse_map(char *filename, t_map *map)
 {
 	uint32_t	fd;
-	char		*path;
 	char		*buffer;
-	//ssize_t		bytes_read;
 	char		**text;
 
 	buffer = NULL;
-	path = ft_strjoin(PATH_MAP, filename); // combine this line and the following?
-	fd = open(path, O_RDONLY);
-	printf("fd:%d, filename: '%s'\n", fd, path); // testing
+	fd = open(ft_strjoin(PATH_MAP, filename), O_RDONLY);
 	if (fd < 0)
-		return (free(path), write(1, "file open error\n", 16));
+		return (write(2, "File open error\n", 16));
 	if (fill_buffer(&buffer, fd) < 0)
-		return (free(path), -1);
+		return (-1);
 	text = ft_split(buffer, '\n');
 	free(buffer);
 	if (!*text)
-		return (free(path), -1);
+		return (-1);
 	map->size_y = ft_size(text);
-	map->size_x = count_cells(*text, ' ');
+	map->size_x = count_cells(text[0], ' ');
 	map->min_z = INT32_MAX;
 	map->max_z = INT32_MIN;
 	map->nodes = (t_node*)ft_calloc(map->size_x * map->size_y, sizeof(t_node));

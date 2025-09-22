@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/22 15:26:24 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/22 18:24:24 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/libft/libft.h"
 
-# define BUFFER_SIZE 20480
+# define BUFFER_SIZE 40480
 # define PI	3.1416
 # define WIDTH 2000
 # define HEIGHT 2000
@@ -32,7 +32,7 @@
 # define TRAN_STEP 10
 # define ZOOM_STEP 1.05
 # define NODE_RADIUS 5
-# define HEIGHT_SCALE 1
+# define HEIGHT_SCALE 0.2
 # define ISOMETRIC 1
 # define TOPDOWN 2
 # define DIMETRIC 3
@@ -162,6 +162,7 @@ char		*ft_strlchr(char *s, int c, size_t l);
 uint32_t	ft_hextoi(const char *nptr);
 int32_t 	ft_size(char **arr);
 int32_t		count_cells(char *txt, char c);
+uint32_t	get_index(int32_t x, int32_t y, t_map *map);
 
 // debugging
 void p_display_val(t_display	*display);

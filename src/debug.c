@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:18:04 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/21 17:24:39 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/22 17:25:01 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void p_map(t_map *map)
 	}
 	
 	printf("Map | X: %d | Y: %d\n", map->size_x, map->size_y);
+	return ;
 	while (i < map->size_y)
 	{
 		j = 0;

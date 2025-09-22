@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 		return(write(1, "invalid args\n", 13));
 
 	result = parse_map(argv[1], &map); // fit this directly into init_display call?
-	//p_map(&map);
+	p_map(&map);
 	ft_strlcpy(map.filename, argv[1], ft_strlen(argv[1]));
 	display = init_display(&map);
 	if (!display)

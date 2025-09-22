@@ -6,12 +6,17 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:24:30 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/22 15:24:38 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/22 18:24:12 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "fdf.h"
+
+uint32_t get_index(int32_t x, int32_t y, t_map *map)
+{
+	return (y * map->size_x + x);
+}
 
 char	*ft_strlchr(char *s, int c, size_t l)
 {
@@ -83,7 +88,7 @@ int32_t		count_cells(char *txt, char c)
 	prev = c;
 	while (*txt)
 	{
-		if (ft_isalnum(*txt) && prev == c)
+		if ((ft_isalnum(*txt) || *txt == '-') && prev == c)
 		{
 			i++;
 		}
