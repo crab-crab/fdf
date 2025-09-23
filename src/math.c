@@ -6,13 +6,13 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:18:25 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/21 17:06:45 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/23 16:37:00 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int32_t ft_abs(int32_t num)
+int32_t	ft_abs(int32_t num)
 {
 	if (num == INT32_MIN)
 		return (INT32_MAX);
@@ -21,7 +21,7 @@ int32_t ft_abs(int32_t num)
 	return (num);
 }
 
-uint8_t clampf_u8(float value)
+uint8_t	clampf_u8(float value)
 {
 	if (value < 0)
 		return (0);
@@ -31,12 +31,12 @@ uint8_t clampf_u8(float value)
 		return ((uint8_t)(value + 0.5));
 }
 
-float dtor(float degrees)
+float	dtor(float degrees)
 {
 	return ((degrees * PI) / 180);
 }
 
-float rtod(float radians)
+float	rtod(float radians)
 {
 	return (radians * (180 / PI));
 }

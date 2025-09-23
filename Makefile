@@ -26,8 +26,7 @@ SRCS =	$(SRCDIR)/main.c \
 		$(SRCDIR)/hook_input.c \
 		$(SRCDIR)/ingest.c \
 		$(SRCDIR)/math.c \
-		$(SRCDIR)/utils.c \
-		$(SRCDIR)/debug.c
+		$(SRCDIR)/utils.c
 		
 		
 

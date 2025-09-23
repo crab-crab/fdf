@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/23 14:55:33 by crabin            #+#    #+#             */
+/*   Updated: 2025/09/23 16:06:21 by crabin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 /*
 set every pixel on screen to arg colour
 */
-void wipe_screen(t_display	*display, uint32_t colour)
+void	wipe_screen(t_display	*display, uint32_t colour)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -25,45 +37,43 @@ void wipe_screen(t_display	*display, uint32_t colour)
 Check into MLX42 specific cleanup functions 
 mlx_terminate() mlx_delete_image()
 */
-void free_display(t_display	**display_p)
+void	free_display(t_display	**display_p)
 {
-	t_display *display = *display_p;
-	
+	t_display	*display;
+
+	display = *display_p;
 	if (!display_p || !*display_p)
-        return;
-	
+		return ;
 	if (display->g_img)
 	{
 		free(display->g_img);
 		display->g_img = NULL;
 	}
-
 	if (display->mlx)
 	{
 		free(display->mlx);
 		display->mlx = NULL;
 	}
-	
 	free(display);
 	*display_p = NULL;
 }
 
 /*get x.y hypoteneuse size and return zoom factor acording to window size*/
-int dyn_zoom(t_display	*display)
+int	dyn_zoom(t_display	*display)
 {
-	int hypo;
+	int	hypo;
 
-	hypo = sqrt((display->map->size_x * display->map->size_x) + (display->map->size_y * display->map->size_y));
-
+	hypo = sqrt((display->map->size_x * display->map->size_x)
+			+ (display->map->size_y * display->map->size_y));
 	return (WIDTH / hypo);
 }
 
-void reset_display(t_display	*display)
+void	reset_display(t_display	*display)
 {
 	display->node = -1;
 	display->node_f = 1;
 	display->node_rad = NODE_RADIUS;
-	display->zoom_factor = dyn_zoom(display)/2;
+	display->zoom_factor = dyn_zoom(display) / 2;
 	display->offset_x = (WIDTH / 2) - 200;
 	display->offset_y = (HEIGHT / 2) - 200;
 	display->height_scale = HEIGHT_SCALE;
@@ -73,12 +83,11 @@ void reset_display(t_display	*display)
 	display->proj = ISOMETRIC;
 }
 
-
 t_display	*init_display(t_map *map)
 {
 	t_display	*display;
 
-	display = (t_display*)ft_calloc(1, sizeof(t_display));
+	display = (t_display *)ft_calloc(1, sizeof(t_display));
 	if (!display || !map)
 		return (NULL);
 	display->mlx = mlx_init(WIDTH, HEIGHT, "Chicken Coop", true);
@@ -89,6 +98,5 @@ t_display	*init_display(t_map *map)
 		return (free_display(&display), NULL);
 	display->map = map;
 	reset_display(display);
-
 	return (display);
 }

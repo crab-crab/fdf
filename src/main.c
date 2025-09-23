@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/23 16:18:58 by crabin            #+#    #+#             */
+/*   Updated: 2025/09/23 16:41:51 by crabin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-
-
-void hook(void *param)
+void	hook(void *param)
 {
 	t_display	*display;
 
@@ -12,40 +22,29 @@ void hook(void *param)
 	draw_grid(display);
 }
 
-void cleanup(t_display	*display)
+void	cleanup(t_display	*display)
 {
 	free(display->map->nodes);
 	free(display->map);
-
 	mlx_terminate(display->mlx);
-
-
 	free(display);
 }
 
-/*
-Add
-	-Keyhooks
-*/
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_map map;
+	t_map		map;
 	t_display	*display;
-	int	result;
+	int			result;
 
 	if (argc != 2)
-		return(write(1, "invalid args\n", 13));
-
-	result = parse_map(argv[1], &map); // fit this directly into init_display call?
-	p_map(&map);
-	ft_strlcpy(map.filename, argv[1], ft_strlen(argv[1]));
+		return (write(1, "invalid args\n", 13));
+	result = parse_map(argv[1], &map);
 	display = init_display(&map);
 	if (!display)
-		return (EXIT_FAILURE); //check use of exit -> change to return?
-
+		return (EXIT_FAILURE);
 	mlx_image_to_window(display->mlx, display->g_img, 0, 0);
 	mlx_loop_hook(display->mlx, &hook, display);
 	mlx_loop(display->mlx);
 	cleanup(display);
+	return (1);
 }

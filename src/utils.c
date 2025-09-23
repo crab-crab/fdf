@@ -6,14 +6,13 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:24:30 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/22 18:24:12 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/23 16:17:04 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fdf.h"
 
-uint32_t get_index(int32_t x, int32_t y, t_map *map)
+uint32_t	get_index(int32_t x, int32_t y, t_map *map)
 {
 	return (y * map->size_x + x);
 }
@@ -34,8 +33,8 @@ char	*ft_strlchr(char *s, int c, size_t l)
 	return (NULL);
 }
 
-/*hextoi()  converts the  portion of the string after 'x' character pointed to by
-nptr to int. Returns the converted value or 0 on error/overflow.*/
+/*hextoi()  converts the  portion of the string after 'x' character pointed to 
+by nptr to int. Returns the converted value or 0 on error/overflow.*/
 uint32_t	ft_hextoi(const char *nptr) //move to lib_ft?
 {
 	uint64_t	result;
@@ -64,9 +63,9 @@ uint32_t	ft_hextoi(const char *nptr) //move to lib_ft?
 	return ((uint32_t)result);
 }
 
-int32_t 	ft_size(char **arr)
+int32_t	ft_size(char **arr)
 {
-	int32_t size;
+	int32_t	size;
 
 	size = 0;
 	if (!arr)
@@ -79,7 +78,7 @@ int32_t 	ft_size(char **arr)
 	return (size);
 }
 
-int32_t		count_cells(char *txt, char c)
+int32_t	count_cells(char *txt, char c)
 {
 	char	prev;
 	int		i;
