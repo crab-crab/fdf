@@ -1,39 +1,44 @@
 
+##########
+# CONFIG #######################################
+##########
 
-NAME = tutorial
+NAME = fdf
 CC = cc
-
-# -O2 to fold constant math functions
-CFLAGS = -O2 -g -Wall -Wextra #-Werror
-
-LIBMLX = lib/MLX42
-LIBFT = lib/libft
-
-HEADERS = -I ./include -I $(LIBMLX)/include -I $(LIBFT)
-LIBS = -L$(LIBMLX)/build -lmlx42 -L$(LIBFT) -lft -lglfw -pthread -lm
 
 SRCDIR = src
 OBJDIR = obj
+LIBMLX = lib/MLX42
+LIBFT = lib/libft
 
-SRCS =	$(SRCDIR)/main.c \
-		$(SRCDIR)/display.c \
-		$(SRCDIR)/colour.c \
-		$(SRCDIR)/draw_line.c \
-		$(SRCDIR)/draw_grid.c \
-		$(SRCDIR)/draw_circle.c \
-		$(SRCDIR)/rotation.c \
-		$(SRCDIR)/projections.c \
-		$(SRCDIR)/hook_input.c \
-		$(SRCDIR)/ingest.c \
-		$(SRCDIR)/math.c \
-		$(SRCDIR)/utils.c
-		
-		
+# -O2 to fold constant math functions
+CFLAGS = -O2 -g -Wall -Wextra #-Werror
+CPPFLAGS = -I ./include -I $(LIBMLX)/include -I $(LIBFT)
+LDFLAGS	= -L$(LIBMLX)/build -L$(LIBFT)
+LDLIBS	= -lmlx42 -lft -lglfw -pthread -lm
 
-# check wildcard usage (%)
-OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+SRCS =	main.c \
+		display.c \
+		colour.c \
+		draw_line.c \
+		draw_grid.c \
+		draw_circle.c \
+		rotation.c \
+		projections.c \
+		hook_input.c \
+		ingest.c \
+		math.c \
+		utils.c
 
-all: libmlx libft $(NAME)
+# check wildcard usage (%)		
+SRCS     := $(addprefix $(SRCDIR)/,$(SRCS))
+OBJS     = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)		
+
+#########
+# RULES #######################################
+#########
+
+all: $(NAME)
 
 # -j4 parallelism
 libmlx:
@@ -42,16 +47,20 @@ libmlx:
 libft:
 	@$(MAKE) -C $(LIBFT)
 
+#pass headers or -I flag?
+$(NAME): libmlx libft $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME) 
+	@echo "Linking: $@"
+
 # check wildcard usage (%)
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+	@echo "Compiling: $(notdir $<)"
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-#pass headers or -I flag?
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) 
+
 
 clean:
 	@rm -rf $(LIBMLX)/build

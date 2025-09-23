@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:50:25 by crabin            #+#    #+#             */
-/*   Updated: 2025/05/10 16:01:26 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/23 17:13:43 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	count_sections(char const *s, char c)
 
 	count = 0;
 	prev = c;
+	if (!s)
+		return (0);
 	while (*s)
 	{
 		if (prev == c && *s != c)

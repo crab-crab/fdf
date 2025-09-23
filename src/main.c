@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:18:58 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/23 16:41:51 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/23 17:38:00 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	hook(void *param)
 void	cleanup(t_display	*display)
 {
 	free(display->map->nodes);
-	free(display->map);
 	mlx_terminate(display->mlx);
 	free(display);
 }

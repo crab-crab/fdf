@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/23 14:55:11 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/23 17:48:13 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	fill_buffer(char **buffer, int fd)
 		swap = ft_strjoin(*buffer, temp);
 		if (!swap)
 			return (free(temp), -1);
+		free (*buffer);
 		*buffer = swap;
 	}
 	return (free(temp), 1);
@@ -114,5 +115,6 @@ int32_t	parse_map(char *filename, t_map *map)
 	if (!map->nodes)
 		return (free_char_2d(text), -1);
 	fill_map(map, text);
+	free_char_2d(text);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/23 16:14:20 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/23 16:45:04 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ typedef struct s_display
 	t_map		*map;
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
-	mlx_image_t	*text_img;
 }	t_display;
 
 typedef struct s_line
