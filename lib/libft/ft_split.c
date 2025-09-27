@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:50:25 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/23 17:13:43 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/25 15:52:02 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ char	**ft_split(char const *s, char c)
 
 	j = 0;
 	i = 0;
-	sections = (char **)malloc((count_sections(s, c) + 1) * sizeof(char *));
-	if (!sections || !s)
+	if (!s)
+		return (NULL);
+	sections = (char **)ft_calloc((count_sections(s, c) + 1), sizeof(char *));
+	if (!sections)
 		return (NULL);
 	while (s[i] && j < count_sections(s, c))
 	{
@@ -93,6 +95,5 @@ char	**ft_split(char const *s, char c)
 		i += slice[1];
 		j++;
 	}
-	sections[j] = NULL;
 	return (sections);
 }

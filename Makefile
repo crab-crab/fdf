@@ -12,7 +12,7 @@ LIBMLX = lib/MLX42
 LIBFT = lib/libft
 
 # -O2 to fold constant math functions
-CFLAGS = -O2 -g -Wall -Wextra #-Werror
+CFLAGS = -O2 -g -Wall -Wextra -Werror
 CPPFLAGS = -I ./include -I $(LIBMLX)/include -I $(LIBFT)
 LDFLAGS	= -L$(LIBMLX)/build -L$(LIBFT)
 LDLIBS	= -lmlx42 -lft -lglfw -pthread -lm
@@ -48,32 +48,27 @@ libft:
 	@$(MAKE) -C $(LIBFT)
 
 #pass headers or -I flag?
-$(NAME): libmlx libft $(OBJS)
+$(NAME): Makefile libmlx libft $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME) 
 	@echo "Linking: $@"
 
 # check wildcard usage (%)
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile | $(OBJDIR)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 	@echo "Compiling: $(notdir $<)"
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-
-
 clean:
 	@rm -rf $(LIBMLX)/build
 	$(MAKE) -C $(LIBFT) clean
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJDIR)
 
 fclean: clean
 	@rm -rf $(NAME)
+	$(MAKE) -C $(LIBFT) fclean
 
 re: clean all
 
 .PHONY: all clean fclean re libmlx libft
-
-
-
-

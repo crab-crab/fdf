@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:08:39 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/23 16:45:04 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/27 17:53:52 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define BUFFER_SIZE 40480
 # define PI	3.1416
-# define WIDTH 2000
+# define WIDTH 3000
 # define HEIGHT 2000
 # define BORDER 50
 # define ROT_STEP 0.06

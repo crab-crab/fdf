@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:00:46 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/23 16:08:49 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/25 14:28:50 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_line(t_line *line, t_node p0, t_node p1)
 	line->start_y = (int32_t)p0.pix_y;
 }
 
-void	draw_pixel(mlx_image_t	*g_img, int32_t pix_x,\
+inline void	draw_pixel(mlx_image_t	*g_img, int32_t pix_x,\
 					int32_t pix_y, uint32_t colour)
 {
 	if (pix_x >= 0 + BORDER && pix_x <= WIDTH - BORDER

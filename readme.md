@@ -1,14 +1,11 @@
 
-Todo:
+=== Fil de fer ===
 
-draw_update -> valid point -> remove debug -> improve zoomed in perf?
+Controls:
 
-Rotation logic
-
-	-> make iterator that goes through grid & takes function pointer to apply over each node
-		-> pass rotation/translation instructions through it
-			-> only perform relevant operations when key is pressed
-
-User Input
-
-	-> use of sleep after toggle commands to make them usable?
+W/A/S/D/E/Q		- Rotation
+Z/X				- Zoom
+R/F				- Height/Z-Scaling
+SPACE			- Reset view
+P/Semicolon		- Node drawing
+O/L				- Node Size

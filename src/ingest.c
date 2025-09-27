@@ -6,7 +6,7 @@
 /*   By: crabin <crabin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:11:52 by crabin            #+#    #+#             */
-/*   Updated: 2025/09/23 17:48:13 by crabin           ###   ########.fr       */
+/*   Updated: 2025/09/25 15:40:57 by crabin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	free_char_2d(char **txt)
 	int	i;
 
 	i = 0;
+	if (!txt)
+		return ;
 	while (txt[i])
 	{
 		free(txt[i]);
@@ -100,13 +102,13 @@ int32_t	parse_map(char *filename, t_map *map)
 	buffer = NULL;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (write(2, "File open error\n", 16));
+		return (write(2, "File open error\n", 16), -1);
 	if (fill_buffer(&buffer, fd) < 0)
-		return (-1);
+		return (free(buffer), -1);
 	text = ft_split(buffer, '\n');
 	free(buffer);
-	if (!*text)
-		return (-1);
+	if (!text || !text[0])
+		return (free_char_2d(text), -1);
 	map->size_y = ft_size(text);
 	map->size_x = count_cells(text[0], ' ');
 	map->min_z = INT32_MAX;
@@ -114,7 +116,8 @@ int32_t	parse_map(char *filename, t_map *map)
 	map->nodes = (t_node *)ft_calloc(map->size_x * map->size_y, sizeof(t_node));
 	if (!map->nodes)
 		return (free_char_2d(text), -1);
-	fill_map(map, text);
+	if (fill_map(map, text) < 1)
+		return (free(map->nodes), free_char_2d(text), -1);
 	free_char_2d(text);
 	return (1);
 }
